@@ -1,0 +1,428 @@
+{
+  "slug": "edexcel-ial-p3",
+  "source_pdf": "/Users/qingzhuling/Desktop/学习材料/Alevel/Edexcel Math/教材/Edexcel International A Level Mathematics Pure Mathematics 3 Student Book by Joe Skrakowski Harry Smith (z-lib.org).pdf",
+  "page_count": 233,
+  "page_offset": 10,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "ALGEBRAIC METHODS",
+      "printed_page": 1,
+      "sections": [
+        {
+          "section": "1.1",
+          "title": "ARITHMETIC OPERATIONS WITH ALGEBRAIC FRACTIONS",
+          "printed_page": 2,
+          "pdf_page": 13,
+          "located": true
+        },
+        {
+          "section": "1.2",
+          "title": "IMPROPER FRACTIONS",
+          "printed_page": 5,
+          "pdf_page": 16,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 1",
+          "printed_page": 8,
+          "pdf_page": 19,
+          "located": false
+        }
+      ],
+      "pdf_page": 12,
+      "located": true
+    },
+    {
+      "chapter": 2,
+      "title": "FUNCTIONS AND GRAPHS",
+      "printed_page": 10,
+      "sections": [
+        {
+          "section": "2.1",
+          "title": "THE MODULUS FUNCTION",
+          "printed_page": 11,
+          "pdf_page": 22,
+          "located": true
+        },
+        {
+          "section": "2.2",
+          "title": "FUNCTIONS AND MAPPINGS",
+          "printed_page": 15,
+          "pdf_page": 26,
+          "located": true
+        },
+        {
+          "section": "2.3",
+          "title": "COMPOSITE FUNCTIONS",
+          "printed_page": 20,
+          "pdf_page": 31,
+          "located": true
+        },
+        {
+          "section": "2.4",
+          "title": "INVERSE FUNCTIONS",
+          "printed_page": 24,
+          "pdf_page": 35,
+          "located": true
+        },
+        {
+          "section": "2.5",
+          "title": "y =If(x)| AND y = f(Ixl)",
+          "printed_page": 28,
+          "pdf_page": 39,
+          "located": false
+        },
+        {
+          "section": "2.6",
+          "title": "COMBINING TRANSFORMATIONS",
+          "printed_page": 32,
+          "pdf_page": 43,
+          "located": true
+        },
+        {
+          "section": "2.7",
+          "title": "SOLVING MODULUS PROBLEMS",
+          "printed_page": 35,
+          "pdf_page": 46,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 2",
+          "printed_page": 40,
+          "pdf_page": 51,
+          "located": false
+        }
+      ],
+      "pdf_page": 21,
+      "located": true
+    },
+    {
+      "chapter": 3,
+      "title": "TRIGONOMETRIC FUNCTIONS",
+      "printed_page": 46,
+      "sections": [
+        {
+          "section": "3.1",
+          "title": "SECANT, COSECANT AND COTANGENT",
+          "printed_page": 47,
+          "pdf_page": 58,
+          "located": true
+        },
+        {
+          "section": "3.2",
+          "title": "GRAPHS OF sec x, cosec x AND cot x",
+          "printed_page": 49,
+          "pdf_page": 60,
+          "located": true
+        },
+        {
+          "section": "3.3",
+          "title": "USING sec x, cosec x AND cot x",
+          "printed_page": 53,
+          "pdf_page": 64,
+          "located": false
+        },
+        {
+          "section": "3.4",
+          "title": "TRIGONOMETRIC IDENTITIES",
+          "printed_page": 57,
+          "pdf_page": 68,
+          "located": true
+        },
+        {
+          "section": "3.5",
+          "title": "INVERSE TRIGONOMETRIC FUNCTIONS",
+          "printed_page": 62,
+          "pdf_page": 73,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 3",
+          "printed_page": 66,
+          "pdf_page": 77,
+          "located": false
+        }
+      ],
+      "pdf_page": 57,
+      "located": true
+    },
+    {
+      "chapter": 4,
+      "title": "TRIGONOMETRIC ADDITION FORMULAE",
+      "printed_page": 70,
+      "sections": [
+        {
+          "section": "4.1",
+          "title": "ADDITION FORMULAE",
+          "printed_page": 71,
+          "pdf_page": 82,
+          "located": true
+        },
+        {
+          "section": "4.2",
+          "title": "USING THE ANGLE ADDITION FORMULAE",
+          "printed_page": 75,
+          "pdf_page": 86,
+          "located": true
+        },
+        {
+          "section": "4.3",
+          "title": "DOUBLE-ANGLE FORMULAE",
+          "printed_page": 78,
+          "pdf_page": 89,
+          "located": true
+        },
+        {
+          "section": "4.4",
+          "title": "SOLVING TRIGONOMETRIC EQUATIONS",
+          "printed_page": 81,
+          "pdf_page": 92,
+          "located": true
+        },
+        {
+          "section": "4.5",
+          "title": "SIMPLIFYING a cos x = b sin x",
+          "printed_page": 85,
+          "pdf_page": 96,
+          "located": true
+        },
+        {
+          "section": "4.6",
+          "title": "PROVING TRIGONOMETRIC IDENTITIES",
+          "printed_page": 90,
+          "pdf_page": 101,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 4",
+          "printed_page": 93,
+          "pdf_page": 104,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 1",
+          "printed_page": 97,
+          "pdf_page": 108,
+          "located": false
+        }
+      ],
+      "pdf_page": 81,
+      "located": true
+    },
+    {
+      "chapter": 5,
+      "title": "EXPONENTIALS AND LOGARITHMS",
+      "printed_page": 102,
+      "sections": [
+        {
+          "section": "5.1",
+          "title": "EXPONENTIAL FUNCTIONS",
+          "printed_page": 103,
+          "pdf_page": 114,
+          "located": true
+        },
+        {
+          "section": "5.2",
+          "title": "y = gax+b + C",
+          "printed_page": 105,
+          "pdf_page": 116,
+          "located": false
+        },
+        {
+          "section": "5.3",
+          "title": "NATURAL LOGARITHMS",
+          "printed_page": 108,
+          "pdf_page": 119,
+          "located": true
+        },
+        {
+          "section": "5.4",
+          "title": "LOGARITHMS AND NON-LINEAR DATA",
+          "printed_page": 110,
+          "pdf_page": 121,
+          "located": true
+        },
+        {
+          "section": "5.5",
+          "title": "EXPONENTIAL MODELLING",
+          "printed_page": 116,
+          "pdf_page": 127,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 5",
+          "printed_page": 118,
+          "pdf_page": 129,
+          "located": false
+        }
+      ],
+      "pdf_page": 113,
+      "located": true
+    },
+    {
+      "chapter": 6,
+      "title": "DIFFERENTIATION",
+      "printed_page": 122,
+      "sections": [
+        {
+          "section": "6.1",
+          "title": "DIFFERENTIATING sin x AND COS X",
+          "printed_page": 123,
+          "pdf_page": 134,
+          "located": true
+        },
+        {
+          "section": "6.2",
+          "title": "DIFFERENTIATING EXPONENTIALS AND LOGARITHMS",
+          "printed_page": 126,
+          "pdf_page": 137,
+          "located": true
+        },
+        {
+          "section": "6.3",
+          "title": "THE CHAIN RULE",
+          "printed_page": 128,
+          "pdf_page": 139,
+          "located": true
+        },
+        {
+          "section": "6.4",
+          "title": "THE PRODUCT RULE",
+          "printed_page": 132,
+          "pdf_page": 143,
+          "located": true
+        },
+        {
+          "section": "6.5",
+          "title": "THE QUOTIENT RULE",
+          "printed_page": 134,
+          "pdf_page": 145,
+          "located": true
+        },
+        {
+          "section": "6.6",
+          "title": "DIFFERENTIATING TRIGONOMETRIC FUNCTIONS",
+          "printed_page": 137,
+          "pdf_page": 148,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 6",
+          "printed_page": 142,
+          "pdf_page": 153,
+          "located": false
+        }
+      ],
+      "pdf_page": 133,
+      "located": true
+    },
+    {
+      "chapter": 7,
+      "title": "INTEGRATION",
+      "printed_page": 146,
+      "sections": [
+        {
+          "section": "7.1",
+          "title": "INTEGRATING STANDARD FUNCTIONS",
+          "printed_page": 147,
+          "pdf_page": 158,
+          "located": true
+        },
+        {
+          "section": "7.2",
+          "title": "INTEGRATING f(ax + b)",
+          "printed_page": 149,
+          "pdf_page": 160,
+          "located": true
+        },
+        {
+          "section": "7.3",
+          "title": "USING TRIGONOMETRIC IDENTITIES",
+          "printed_page": 151,
+          "pdf_page": 162,
+          "located": true
+        },
+        {
+          "section": "7.4",
+          "title": "REVERSE CHAIN RULE",
+          "printed_page": 153,
+          "pdf_page": 164,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 7",
+          "printed_page": 156,
+          "pdf_page": 167,
+          "located": false
+        }
+      ],
+      "pdf_page": 157,
+      "located": true
+    },
+    {
+      "chapter": 8,
+      "title": "NUMERICAL METHODS",
+      "printed_page": 158,
+      "sections": [
+        {
+          "section": "8.1",
+          "title": "LOCATING ROOTS",
+          "printed_page": 159,
+          "pdf_page": 170,
+          "located": true
+        },
+        {
+          "section": "8.2",
+          "title": "FIXED POINT ITERATION",
+          "printed_page": 163,
+          "pdf_page": 174,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 8",
+          "printed_page": 167,
+          "pdf_page": 178,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 2",
+          "printed_page": 170,
+          "pdf_page": 181,
+          "located": false
+        },
+        {
+          "label": "EXAM PRACTICE",
+          "printed_page": 174,
+          "pdf_page": 185,
+          "located": false
+        },
+        {
+          "label": "GLOSSARY",
+          "printed_page": 176,
+          "pdf_page": 187,
+          "located": false
+        },
+        {
+          "label": "ANSWERS",
+          "printed_page": 178,
+          "pdf_page": 189,
+          "located": false
+        },
+        {
+          "label": "INDEX",
+          "printed_page": 214,
+          "pdf_page": 225,
+          "located": false
+        }
+      ],
+      "pdf_page": 169,
+      "located": true
+    }
+  ],
+  "unit": "Pure Mathematics 3",
+  "exam_board": "Edexcel",
+  "qualification": "International A Level Mathematics",
+  "sections_located": 34,
+  "sections_total": 37
+}

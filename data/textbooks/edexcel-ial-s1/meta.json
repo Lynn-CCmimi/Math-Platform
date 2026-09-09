@@ -1,0 +1,413 @@
+{
+  "slug": "edexcel-ial-s1",
+  "source_pdf": "/Users/qingzhuling/Desktop/学习材料/Alevel/Edexcel Math/教材/Edexcel International A Level Mathematics Statistics 1 Student Book by Joe Skrakowski Harry Smith (z-lib.org).pdf",
+  "page_count": 217,
+  "page_offset": 10,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "MATHEMATICAL MODELLING",
+      "printed_page": 1,
+      "sections": [
+        {
+          "section": "1.1",
+          "title": "MATHEMATICAL MODELS",
+          "printed_page": 2,
+          "pdf_page": 13,
+          "located": true
+        },
+        {
+          "section": "1.2",
+          "title": "DESIGNING A MODEL",
+          "printed_page": 3,
+          "pdf_page": 14,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 1",
+          "printed_page": 4,
+          "pdf_page": 15,
+          "located": false
+        }
+      ],
+      "pdf_page": 12,
+      "located": true
+    },
+    {
+      "chapter": 2,
+      "title": "MEASURES OF LOCATION AND SPREAD",
+      "printed_page": 5,
+      "sections": [
+        {
+          "section": "2.1",
+          "title": "TYPES OF DATA",
+          "printed_page": 6,
+          "pdf_page": 17,
+          "located": true
+        },
+        {
+          "section": "2.2",
+          "title": "MEASURES OF CENTRAL TENDENCY",
+          "printed_page": 9,
+          "pdf_page": 20,
+          "located": true
+        },
+        {
+          "section": "2.3",
+          "title": "OTHER MEASURES OF LOCATION",
+          "printed_page": 13,
+          "pdf_page": 24,
+          "located": true
+        },
+        {
+          "section": "2.4",
+          "title": "MEASURES OF SPREAD",
+          "printed_page": 16,
+          "pdf_page": 27,
+          "located": true
+        },
+        {
+          "section": "2.5",
+          "title": "VARIANCE AND STANDARD DEVIATION",
+          "printed_page": 18,
+          "pdf_page": 29,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 2",
+          "printed_page": 25,
+          "pdf_page": 36,
+          "located": false
+        }
+      ],
+      "pdf_page": 16,
+      "located": true
+    },
+    {
+      "chapter": 3,
+      "title": "REPRESENTATIONS OF DATA",
+      "printed_page": 29,
+      "sections": [
+        {
+          "section": "3.1",
+          "title": "HISTOGRAMS",
+          "printed_page": 30,
+          "pdf_page": 41,
+          "located": true
+        },
+        {
+          "section": "3.2",
+          "title": "OUTLIERS",
+          "printed_page": 35,
+          "pdf_page": 46,
+          "located": true
+        },
+        {
+          "section": "3.3",
+          "title": "BOX PLOTS",
+          "printed_page": 38,
+          "pdf_page": 49,
+          "located": true
+        },
+        {
+          "section": "3.4",
+          "title": "STEM AND LEAF DIAGRAMS",
+          "printed_page": 40,
+          "pdf_page": 51,
+          "located": true
+        },
+        {
+          "section": "3.5",
+          "title": "SKEWNESS",
+          "printed_page": 44,
+          "pdf_page": 55,
+          "located": true
+        },
+        {
+          "section": "3.6",
+          "title": "COMPARING DATA",
+          "printed_page": 48,
+          "pdf_page": 59,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 3",
+          "printed_page": 49,
+          "pdf_page": 60,
+          "located": false
+        }
+      ],
+      "pdf_page": 40,
+      "located": true
+    },
+    {
+      "chapter": 4,
+      "title": "PROBABILITY",
+      "printed_page": 54,
+      "sections": [
+        {
+          "section": "4.1",
+          "title": "UNDERSTANDING THE VOCABULARY USED IN PROBABILITY",
+          "printed_page": 55,
+          "pdf_page": 66,
+          "located": true
+        },
+        {
+          "section": "4.2",
+          "title": "VENN DIAGRAMS",
+          "printed_page": 57,
+          "pdf_page": 68,
+          "located": true
+        },
+        {
+          "section": "4.3",
+          "title": "MUTUALLY EXCLUSIVE AND INDEPENDENT EVENTS",
+          "printed_page": 60,
+          "pdf_page": 71,
+          "located": true
+        },
+        {
+          "section": "4.4",
+          "title": "SET NOTATION",
+          "printed_page": 63,
+          "pdf_page": 74,
+          "located": true
+        },
+        {
+          "section": "4.5",
+          "title": "CONDITIONAL PROBABILITY",
+          "printed_page": 68,
+          "pdf_page": 79,
+          "located": true
+        },
+        {
+          "section": "4.6",
+          "title": "CONDITIONAL PROBABILITIES IN VENN DIAGRAMS",
+          "printed_page": 71,
+          "pdf_page": 82,
+          "located": true
+        },
+        {
+          "section": "4.7",
+          "title": "PROBABILITY FORMULAE",
+          "printed_page": 74,
+          "pdf_page": 85,
+          "located": true
+        },
+        {
+          "section": "4.8",
+          "title": "TREE DIAGRAMS",
+          "printed_page": 77,
+          "pdf_page": 88,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 4",
+          "printed_page": 82,
+          "pdf_page": 93,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 1",
+          "printed_page": 88,
+          "pdf_page": 99,
+          "located": false
+        }
+      ],
+      "pdf_page": 65,
+      "located": true
+    },
+    {
+      "chapter": 5,
+      "title": "CORRELATION AND REGRESSION",
+      "printed_page": 95,
+      "sections": [
+        {
+          "section": "5.1",
+          "title": "SCATTER DIAGRAMS",
+          "printed_page": 96,
+          "pdf_page": 107,
+          "located": true
+        },
+        {
+          "section": "5.2",
+          "title": "LINEAR REGRESSION",
+          "printed_page": 99,
+          "pdf_page": 110,
+          "located": true
+        },
+        {
+          "section": "5.3",
+          "title": "CALCULATING LEAST SQUARES LINEAR REGRESSION",
+          "printed_page": 103,
+          "pdf_page": 114,
+          "located": true
+        },
+        {
+          "section": "5.4",
+          "title": "THE PRODUCT MOMENT CORRELATION COEFFICIENT",
+          "printed_page": 112,
+          "pdf_page": 123,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 5",
+          "printed_page": 118,
+          "pdf_page": 129,
+          "located": false
+        }
+      ],
+      "pdf_page": 106,
+      "located": true
+    },
+    {
+      "chapter": 6,
+      "title": "DISCRETE RANDOM VARIABLES",
+      "printed_page": 124,
+      "sections": [
+        {
+          "section": "6.1",
+          "title": "DISCRETE RANDOM VARIABLES",
+          "printed_page": 125,
+          "pdf_page": 136,
+          "located": true
+        },
+        {
+          "section": "6.2",
+          "title": "FINDING THE CUMULATIVE DISTRIBUTION FUNCTION FOR A DISCRETE RANDOM VARIABLE",
+          "printed_page": 130,
+          "pdf_page": 141,
+          "located": true
+        },
+        {
+          "section": "6.3",
+          "title": "EXPECTED VALUE OF A DISCRETE RANDOM VARIABLE",
+          "printed_page": 133,
+          "pdf_page": 144,
+          "located": true
+        },
+        {
+          "section": "6.4",
+          "title": "VARIANCE OF A DISCRETE RANDOM VARIABLE",
+          "printed_page": 136,
+          "pdf_page": 147,
+          "located": true
+        },
+        {
+          "section": "6.5",
+          "title": "EXPECTED VALUE AND VARIANCE OF A FUNCTION OF X",
+          "printed_page": 138,
+          "pdf_page": 149,
+          "located": true
+        },
+        {
+          "section": "6.6",
+          "title": "SOLVING PROBLEMS INVOLVING RANDOM VARIABLES",
+          "printed_page": 142,
+          "pdf_page": 153,
+          "located": true
+        },
+        {
+          "section": "6.7",
+          "title": "USING DISCRETE UNIFORM DISTRIBUTION AS A MODEL FOR THE PROBABILITY DISTRIBUTION OF THE OUTCOMES OF CERTAIN EXPERIMENTS",
+          "printed_page": 144,
+          "pdf_page": 155,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 6",
+          "printed_page": 146,
+          "pdf_page": 157,
+          "located": false
+        }
+      ],
+      "pdf_page": 135,
+      "located": true
+    },
+    {
+      "chapter": 7,
+      "title": "THE NORMAL DISTRIBUTION",
+      "printed_page": 151,
+      "sections": [
+        {
+          "section": "7.1",
+          "title": "THE NORMAL DISTRIBUTION",
+          "printed_page": 152,
+          "pdf_page": 163,
+          "located": true
+        },
+        {
+          "section": "7.2",
+          "title": "USING TABLES TO FIND PROBABILITIES OF THE STANDARD NORMAL DISTRIBUTION Z",
+          "printed_page": 155,
+          "pdf_page": 166,
+          "located": true
+        },
+        {
+          "section": "7.3",
+          "title": "USING TABLES TO FIND THE VALUE OF Z GIVEN A PROBABILITY",
+          "printed_page": 158,
+          "pdf_page": 169,
+          "located": true
+        },
+        {
+          "section": "7.4",
+          "title": "THE STANDARD NORMAL DISTRIBUTION",
+          "printed_page": 161,
+          "pdf_page": 172,
+          "located": true
+        },
+        {
+          "section": "7.5",
+          "title": "FINDING Je AND o",
+          "printed_page": 164,
+          "pdf_page": 175,
+          "located": false
+        },
+        {
+          "label": "CHAPTER REVIEW 7",
+          "printed_page": 168,
+          "pdf_page": 179,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 2",
+          "printed_page": 172,
+          "pdf_page": 183,
+          "located": false
+        },
+        {
+          "label": "EXAM PRACTICE NORMAL DISTRIBUTION TABLES",
+          "printed_page": 183,
+          "pdf_page": 194,
+          "located": false
+        },
+        {
+          "label": "GLOSSARY",
+          "printed_page": 185,
+          "pdf_page": 196,
+          "located": false
+        },
+        {
+          "label": "ANSWERS",
+          "printed_page": 187,
+          "pdf_page": 198,
+          "located": false
+        },
+        {
+          "label": "INDEX",
+          "printed_page": 207,
+          "pdf_page": 218,
+          "located": false
+        }
+      ],
+      "pdf_page": 162,
+      "located": true
+    }
+  ],
+  "unit": "Statistics 1",
+  "exam_board": "Edexcel",
+  "qualification": "International A Level Mathematics",
+  "sections_located": 36,
+  "sections_total": 37
+}

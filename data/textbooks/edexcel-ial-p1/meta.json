@@ -1,0 +1,489 @@
+{
+  "slug": "edexcel-ial-p1",
+  "source_pdf": "/Users/qingzhuling/Desktop/学习材料/Alevel/Edexcel Math/教材/Pearson Edexcel International A Level Mathematics Pure Mathematics 1 Student Book.pdf",
+  "page_count": 236,
+  "page_offset": 9,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "ALGEBRAIC EXPRESSIONS",
+      "printed_page": 1,
+      "sections": [
+        {
+          "section": "1.1",
+          "title": "INDEX LAWS",
+          "printed_page": 2,
+          "pdf_page": 12,
+          "located": false
+        },
+        {
+          "section": "1.2",
+          "title": "EXPANDING BRACKETS",
+          "printed_page": 4,
+          "pdf_page": 14,
+          "located": true
+        },
+        {
+          "section": "1.3",
+          "title": "FACTORISING",
+          "printed_page": 6,
+          "pdf_page": 16,
+          "located": true
+        },
+        {
+          "section": "1.4",
+          "title": "NEGATIVE AND FRACTIONAL INDICES",
+          "printed_page": 9,
+          "pdf_page": 19,
+          "located": true
+        },
+        {
+          "section": "1.5",
+          "title": "SURDS",
+          "printed_page": 12,
+          "pdf_page": 22,
+          "located": false
+        },
+        {
+          "section": "1.6",
+          "title": "RATIONALISING DENOMINATORS",
+          "printed_page": 13,
+          "pdf_page": 23,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 1",
+          "printed_page": 15,
+          "pdf_page": 25,
+          "located": false
+        }
+      ],
+      "pdf_page": 11,
+      "located": true
+    },
+    {
+      "chapter": 2,
+      "title": "QUADRATICS",
+      "printed_page": 18,
+      "sections": [
+        {
+          "section": "2.1",
+          "title": "SOLVING QUADRATIC EQUATIONS",
+          "printed_page": 19,
+          "pdf_page": 29,
+          "located": true
+        },
+        {
+          "section": "2.2",
+          "title": "COMPLETING THE SQUARE",
+          "printed_page": 22,
+          "pdf_page": 32,
+          "located": true
+        },
+        {
+          "section": "2.3",
+          "title": "FUNCTIONS",
+          "printed_page": 25,
+          "pdf_page": 35,
+          "located": true
+        },
+        {
+          "section": "2.4",
+          "title": "QUADRATIC GRAPHS",
+          "printed_page": 27,
+          "pdf_page": 37,
+          "located": true
+        },
+        {
+          "section": "2.5",
+          "title": "THE DISCRIMINANT",
+          "printed_page": 30,
+          "pdf_page": 40,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 2",
+          "printed_page": 33,
+          "pdf_page": 43,
+          "located": false
+        }
+      ],
+      "pdf_page": 28,
+      "located": true
+    },
+    {
+      "chapter": 3,
+      "title": "EQUATIONS AND INEQUALITIES",
+      "printed_page": 36,
+      "sections": [
+        {
+          "section": "3.1",
+          "title": "LINEAR SIMULTANEOUS EQUATIONS",
+          "printed_page": 37,
+          "pdf_page": 47,
+          "located": true
+        },
+        {
+          "section": "3.2",
+          "title": "QUADRATIC SIMULTANEOUS EQUATIONS",
+          "printed_page": 39,
+          "pdf_page": 49,
+          "located": true
+        },
+        {
+          "section": "3.3",
+          "title": "SIMULTANEOUS EQUATIONS ON GRAPHS",
+          "printed_page": 40,
+          "pdf_page": 50,
+          "located": true
+        },
+        {
+          "section": "3.4",
+          "title": "LINEAR INEQUALITIES",
+          "printed_page": 44,
+          "pdf_page": 54,
+          "located": true
+        },
+        {
+          "section": "3.5",
+          "title": "QUADRATIC INEQUALITIES",
+          "printed_page": 46,
+          "pdf_page": 56,
+          "located": true
+        },
+        {
+          "section": "3.6",
+          "title": "INEQUALITIES ON GRAPHS",
+          "printed_page": 49,
+          "pdf_page": 59,
+          "located": true
+        },
+        {
+          "section": "3.7",
+          "title": "REGIONS",
+          "printed_page": 51,
+          "pdf_page": 61,
+          "located": false
+        },
+        {
+          "label": "CHAPTER REVIEW 3",
+          "printed_page": 54,
+          "pdf_page": 64,
+          "located": false
+        }
+      ],
+      "pdf_page": 46,
+      "located": false
+    },
+    {
+      "chapter": 4,
+      "title": "GRAPHS AND TRANSFORMATIONS",
+      "printed_page": 57,
+      "sections": [
+        {
+          "section": "4.1",
+          "title": "CUBIC GRAPHS",
+          "printed_page": 58,
+          "pdf_page": 68,
+          "located": true
+        },
+        {
+          "section": "4.2",
+          "title": "RECIPROCAL GRAPHS",
+          "printed_page": 62,
+          "pdf_page": 72,
+          "located": true
+        },
+        {
+          "section": "4.3",
+          "title": "POINTS OF INTERSECTION",
+          "printed_page": 63,
+          "pdf_page": 73,
+          "located": true
+        },
+        {
+          "section": "4.4",
+          "title": "TRANSLATING GRAPHS",
+          "printed_page": 67,
+          "pdf_page": 77,
+          "located": true
+        },
+        {
+          "section": "4.5",
+          "title": "STRETCHING GRAPHS",
+          "printed_page": 71,
+          "pdf_page": 81,
+          "located": false
+        },
+        {
+          "section": "4.6",
+          "title": "TRANSFORMING FUNCTIONS",
+          "printed_page": 75,
+          "pdf_page": 85,
+          "located": false
+        },
+        {
+          "label": "CHAPTER REVIEW 4",
+          "printed_page": 78,
+          "pdf_page": 88,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 1",
+          "printed_page": 81,
+          "pdf_page": 91,
+          "located": false
+        }
+      ],
+      "pdf_page": 67,
+      "located": false
+    },
+    {
+      "chapter": 5,
+      "title": "STRAIGHT LINE GRAPHS",
+      "printed_page": 85,
+      "sections": [
+        {
+          "section": "5.1",
+          "title": "y = mx + c",
+          "printed_page": 86,
+          "pdf_page": 96,
+          "located": false
+        },
+        {
+          "section": "5.2",
+          "title": "EQUATIONS OF STRAIGHT LINES",
+          "printed_page": 89,
+          "pdf_page": 90,
+          "located": true
+        },
+        {
+          "section": "5.3",
+          "title": "PARALLEL AND PERPENDICULAR LINES",
+          "printed_page": 93,
+          "pdf_page": 94,
+          "located": true
+        },
+        {
+          "section": "5.4",
+          "title": "LENGTH AND AREA",
+          "printed_page": 96,
+          "pdf_page": 97,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 5",
+          "printed_page": 99,
+          "pdf_page": 100,
+          "located": false
+        }
+      ],
+      "pdf_page": 86,
+      "located": false
+    },
+    {
+      "chapter": 6,
+      "title": "TRIGONOMETRIC RATIOS",
+      "printed_page": 104,
+      "sections": [
+        {
+          "section": "6.1",
+          "title": "THE COSINE RULE",
+          "printed_page": 105,
+          "pdf_page": 106,
+          "located": true
+        },
+        {
+          "section": "6.2",
+          "title": "THE SINE RULE",
+          "printed_page": 110,
+          "pdf_page": 111,
+          "located": true
+        },
+        {
+          "section": "6.3",
+          "title": "AREAS OF TRIANGLES",
+          "printed_page": 116,
+          "pdf_page": 117,
+          "located": true
+        },
+        {
+          "section": "6.4",
+          "title": "SOLVING TRIANGLE PROBLEMS",
+          "printed_page": 118,
+          "pdf_page": 119,
+          "located": true
+        },
+        {
+          "section": "6.5",
+          "title": "GRAPHS OF SINE, COSINE AND TANGENT",
+          "printed_page": 123,
+          "pdf_page": 124,
+          "located": true
+        },
+        {
+          "section": "6.6",
+          "title": "TRANSFORMING TRIGONOMETRIC GRAPHS",
+          "printed_page": 125,
+          "pdf_page": 126,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 6",
+          "printed_page": 129,
+          "pdf_page": 130,
+          "located": false
+        }
+      ],
+      "pdf_page": 105,
+      "located": true
+    },
+    {
+      "chapter": 7,
+      "title": "RADIANS",
+      "printed_page": 133,
+      "sections": [
+        {
+          "section": "7.1",
+          "title": "RADIAN MEASURE",
+          "printed_page": 134,
+          "pdf_page": 135,
+          "located": true
+        },
+        {
+          "section": "7.2",
+          "title": "ARC LENGTH",
+          "printed_page": 135,
+          "pdf_page": 136,
+          "located": true
+        },
+        {
+          "section": "7.3",
+          "title": "AREAS OF SECTORS AND SEGMENTS",
+          "printed_page": 139,
+          "pdf_page": 140,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 7",
+          "printed_page": 145,
+          "pdf_page": 146,
+          "located": false
+        }
+      ],
+      "pdf_page": 134,
+      "located": false
+    },
+    {
+      "chapter": 8,
+      "title": "DIFFERENTIATION",
+      "printed_page": 150,
+      "sections": [
+        {
+          "section": "8.1",
+          "title": "GRADIENTS OF CURVES",
+          "printed_page": 151,
+          "pdf_page": 153,
+          "located": true
+        },
+        {
+          "section": "8.2",
+          "title": "FINDING THE DERIVATIVE",
+          "printed_page": 154,
+          "pdf_page": 156,
+          "located": true
+        },
+        {
+          "section": "8.3",
+          "title": "DIFFERENTIATING x*",
+          "printed_page": 157,
+          "pdf_page": 159,
+          "located": false
+        },
+        {
+          "section": "8.4",
+          "title": "DIFFERENTIATING QUADRATICS",
+          "printed_page": 159,
+          "pdf_page": 161,
+          "located": true
+        },
+        {
+          "section": "8.5",
+          "title": "DIFFERENTIATING FUNCTIONS WITH TWO OR MORE TERMS",
+          "printed_page": 161,
+          "pdf_page": 163,
+          "located": true
+        },
+        {
+          "section": "8.6",
+          "title": "GRADIENTS, TANGENTS AND NORMALS",
+          "printed_page": 163,
+          "pdf_page": 165,
+          "located": true
+        },
+        {
+          "section": "8.7",
+          "title": "SECOND ORDER DERIVATIVES",
+          "printed_page": 165,
+          "pdf_page": 167,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 8",
+          "printed_page": 167,
+          "pdf_page": 169,
+          "located": false
+        }
+      ],
+      "pdf_page": 152,
+      "located": false
+    },
+    {
+      "chapter": 9,
+      "title": "INTEGRATION",
+      "printed_page": 170,
+      "sections": [
+        {
+          "section": "9.1",
+          "title": "INTEGRATING x*",
+          "printed_page": 171,
+          "pdf_page": 173,
+          "located": false
+        },
+        {
+          "section": "9.2",
+          "title": "INDEFINITE INTEGRALS",
+          "printed_page": 173,
+          "pdf_page": 175,
+          "located": true
+        },
+        {
+          "section": "9.3",
+          "title": "FINDING FUNCTIONS",
+          "printed_page": 176,
+          "pdf_page": 178,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 9",
+          "printed_page": 178,
+          "pdf_page": 180,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 2",
+          "printed_page": 181,
+          "pdf_page": 183,
+          "located": false
+        }
+      ],
+      "pdf_page": 172,
+      "located": false
+    }
+  ],
+  "unit": "Pure Mathematics 1",
+  "exam_board": "Edexcel",
+  "qualification": "International A Level Mathematics",
+  "sections_located": 39,
+  "sections_total": 47
+}
