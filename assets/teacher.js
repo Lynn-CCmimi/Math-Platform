@@ -28,7 +28,7 @@ function toast(msg) {
 }
 
 async function boot() {
-  DATA = await (await fetch('data/index.json')).json();
+  DATA = await (await fetch('data/index.json', { cache: 'no-cache' })).json();
   if (!db.configured) {
     $('gate').hidden = false;
     $('loginErr').textContent = '后台尚未配置';

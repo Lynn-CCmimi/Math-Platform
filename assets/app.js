@@ -49,7 +49,9 @@ function toast(msg) {
 // ------------------------------------------------------------------ boot
 
 async function boot() {
-  DATA = await (await fetch('data/index.json')).json();
+  // revalidate rather than serve from cache, so a newly published unit shows up
+  // on the next refresh instead of whenever the cached copy happens to expire
+  DATA = await (await fetch('data/index.json', { cache: 'no-cache' })).json();
 
   if (!db.configured) {
     $('gate').hidden = false;
