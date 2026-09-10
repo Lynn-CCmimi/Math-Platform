@@ -1,0 +1,286 @@
+{
+  "slug": "edexcel-ial-s3",
+  "source_pdf": "/Users/qingzhuling/Desktop/学习材料/Alevel/Edexcel Math/教材/Edexcel International a Level Mathematics Statistics 3 Student Book by Mr Harry Smith (z-lib.org).pdf",
+  "page_count": 177,
+  "page_offset": 10,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "SAMPLING",
+      "printed_page": 1,
+      "sections": [
+        {
+          "section": "1.1",
+          "title": "SAMPLING",
+          "printed_page": 2,
+          "pdf_page": 13,
+          "located": true
+        },
+        {
+          "section": "1.2",
+          "title": "USING A RANDOM NUMBER TABLE",
+          "printed_page": 2,
+          "pdf_page": 13,
+          "located": true
+        },
+        {
+          "section": "1.3",
+          "title": "RANDOM SAMPLING",
+          "printed_page": 4,
+          "pdf_page": 15,
+          "located": true
+        },
+        {
+          "section": "1.4",
+          "title": "NON-RANDOM SAMPLING",
+          "printed_page": 7,
+          "pdf_page": 18,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 1",
+          "printed_page": 8,
+          "pdf_page": 19,
+          "located": false
+        }
+      ],
+      "pdf_page": 12,
+      "located": true
+    },
+    {
+      "chapter": 2,
+      "title": "COMBINATIONS OF RANDOM VARIABLES",
+      "printed_page": 10,
+      "sections": [
+        {
+          "section": "2.1",
+          "title": "COMBINATIONS OF RANDOM VARIABLES",
+          "printed_page": 11,
+          "pdf_page": 22,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 2",
+          "printed_page": 16,
+          "pdf_page": 27,
+          "located": false
+        }
+      ],
+      "pdf_page": 21,
+      "located": true
+    },
+    {
+      "chapter": 3,
+      "title": "ESTIMATORS AND CONFIDENCE INTERVALS",
+      "printed_page": 19,
+      "sections": [
+        {
+          "section": "3.1",
+          "title": "ESTIMATORS, BIAS AND STANDARD ERROR",
+          "printed_page": 20,
+          "pdf_page": 31,
+          "located": true
+        },
+        {
+          "section": "3.2",
+          "title": "CONFIDENCE INTERVALS",
+          "printed_page": 31,
+          "pdf_page": 42,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 3",
+          "printed_page": 37,
+          "pdf_page": 48,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 1",
+          "printed_page": 43,
+          "pdf_page": 54,
+          "located": false
+        }
+      ],
+      "pdf_page": 30,
+      "located": true
+    },
+    {
+      "chapter": 4,
+      "title": "CENTRAL LIMIT THEOREM AND TESTING THE MEAN",
+      "printed_page": 48,
+      "sections": [
+        {
+          "section": "4.1",
+          "title": "THE CENTRAL LIMIT THEOREM",
+          "printed_page": 49,
+          "pdf_page": 60,
+          "located": true
+        },
+        {
+          "section": "4.2",
+          "title": "APPLYING THE CENTRAL LIMIT THEOREM TO OTHER DISTRIBUTIONS",
+          "printed_page": 51,
+          "pdf_page": 62,
+          "located": true
+        },
+        {
+          "section": "4.3",
+          "title": "CONFIDENCE INTERVALS USING THE CENTRAL LIMIT THEOREM",
+          "printed_page": 53,
+          "pdf_page": 64,
+          "located": true
+        },
+        {
+          "section": "4.4",
+          "title": "HYPOTHESIS TESTING THE MEAN",
+          "printed_page": 54,
+          "pdf_page": 65,
+          "located": true
+        },
+        {
+          "section": "4.5",
+          "title": "HYPOTHESIS TESTING FOR THE DIFFERENCE BETWEEN MEANS",
+          "printed_page": 60,
+          "pdf_page": 70,
+          "located": true
+        },
+        {
+          "section": "4.6",
+          "title": "USE OF LARGE SAMPLE RESULTS FOR AN UNKNOWN POPULATION",
+          "printed_page": 64,
+          "pdf_page": 75,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 4",
+          "printed_page": 66,
+          "pdf_page": 77,
+          "located": false
+        }
+      ],
+      "pdf_page": 59,
+      "located": true
+    },
+    {
+      "chapter": 5,
+      "title": "CORRELATION",
+      "printed_page": 70,
+      "sections": [
+        {
+          "section": "5.1",
+          "title": "SPEARMAN'S RANK CORRELATION COEFFICIENT",
+          "printed_page": 71,
+          "pdf_page": 82,
+          "located": true
+        },
+        {
+          "section": "5.2",
+          "title": "HYPOTHESIS TESTING FOR ZERO CORRELATION",
+          "printed_page": 77,
+          "pdf_page": 88,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 5",
+          "printed_page": 82,
+          "pdf_page": 93,
+          "located": false
+        }
+      ],
+      "pdf_page": 81,
+      "located": true
+    },
+    {
+      "chapter": 6,
+      "title": "GOODNESS OF FIT AND CONTINGENCY TABLES",
+      "printed_page": 88,
+      "sections": [
+        {
+          "section": "6.1",
+          "title": "GOODNESS OF FIT",
+          "printed_page": 89,
+          "pdf_page": 100,
+          "located": true
+        },
+        {
+          "section": "6.2",
+          "title": "DEGREES OF FREEDOM AND THE CHI-SQUARED (X 3) FAMILY OF DISTRIBUTIONS",
+          "printed_page": 93,
+          "pdf_page": 104,
+          "located": true
+        },
+        {
+          "section": "6.3",
+          "title": "TESTING A HYPOTHESIS",
+          "printed_page": 96,
+          "pdf_page": 107,
+          "located": true
+        },
+        {
+          "section": "6.4",
+          "title": "TESTING THE GOODNESS OF FIT WITH DISCRETE DATA",
+          "printed_page": 100,
+          "pdf_page": 111,
+          "located": true
+        },
+        {
+          "section": "6.5",
+          "title": "TESTING THE GOODNESS OF FIT WITH CONTINUOUS DATA",
+          "printed_page": 110,
+          "pdf_page": 121,
+          "located": true
+        },
+        {
+          "section": "6.6",
+          "title": "USING CONTINGENCY TABLES",
+          "printed_page": 116,
+          "pdf_page": 127,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 6",
+          "printed_page": 122,
+          "pdf_page": 133,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 2",
+          "printed_page": 127,
+          "pdf_page": 138,
+          "located": false
+        },
+        {
+          "label": "GLOSSARY",
+          "printed_page": 145,
+          "pdf_page": 156,
+          "located": false
+        },
+        {
+          "label": "ANSWERS",
+          "printed_page": 147,
+          "pdf_page": 158,
+          "located": false
+        },
+        {
+          "label": "EXAM PRACTICE THE NORMAL DISTRIBUTION FUNCTION PERCENTAGE POINTS OF THE NORMAL DISTRIBUTION 136",
+          "printed_page": 160,
+          "pdf_page": 171,
+          "located": false
+        },
+        {
+          "label": "INDEX",
+          "printed_page": 160,
+          "pdf_page": 171,
+          "located": false
+        }
+      ],
+      "pdf_page": 99,
+      "located": true
+    }
+  ],
+  "unit": "Statistics 3",
+  "exam_board": "Edexcel",
+  "qualification": "International A Level Mathematics",
+  "sections_located": 21,
+  "sections_total": 21
+}

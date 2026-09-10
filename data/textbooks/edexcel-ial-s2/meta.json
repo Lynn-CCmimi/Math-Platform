@@ -1,0 +1,329 @@
+{
+  "slug": "edexcel-ial-s2",
+  "source_pdf": "/Users/qingzhuling/Desktop/学习材料/Alevel/Edexcel Math/教材/Edexcel International A Level Mathematics Statistics 2 Student Book by Joe Skrakowski Harry Smith (z-lib.org).pdf",
+  "page_count": 176,
+  "page_offset": 9,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "BINOMIAL DISTRIBUTIONS",
+      "printed_page": 1,
+      "sections": [
+        {
+          "section": "1.1",
+          "title": "THE BINOMIAL DISTRIBUTION",
+          "printed_page": 2,
+          "located": true,
+          "pdf_page": 13
+        },
+        {
+          "section": "1.2",
+          "title": "CUMULATIVE PROBABILITIES",
+          "printed_page": 6,
+          "located": true,
+          "pdf_page": 17
+        },
+        {
+          "section": "1.3",
+          "title": "MEAN AND VARIANCE OF THE BINOMIAL DISTRIBUTION",
+          "printed_page": 10,
+          "located": true,
+          "pdf_page": 21
+        },
+        {
+          "label": "CHAPTER REVIEW 1",
+          "printed_page": 14,
+          "pdf_page": 25,
+          "located": false
+        }
+      ],
+      "pdf_page": 12
+    },
+    {
+      "chapter": 2,
+      "title": "POISSON DISTRIBUTIONS",
+      "printed_page": 17,
+      "sections": [
+        {
+          "section": "2.1",
+          "title": "THE POISSON DISTRIBUTION",
+          "printed_page": 18,
+          "located": true,
+          "pdf_page": 29
+        },
+        {
+          "section": "2.3",
+          "title": "ADDING POISSON DISTRIBUTIONS",
+          "printed_page": 26,
+          "located": true,
+          "pdf_page": 36
+        },
+        {
+          "section": "2.4",
+          "title": "MEAN AND VARIANCE OF A POISSON DISTRIBUTION",
+          "printed_page": 29,
+          "located": true,
+          "pdf_page": 39
+        },
+        {
+          "label": "CHAPTER REVIEW 2",
+          "printed_page": 31,
+          "pdf_page": 42,
+          "located": false
+        },
+        {
+          "section": "2.2",
+          "title": "MODELLING WITH THE POISSON DISTRIBUTION",
+          "printed_page": 83,
+          "located": true,
+          "pdf_page": 105
+        }
+      ],
+      "pdf_page": 28
+    },
+    {
+      "chapter": 3,
+      "title": "APPROXIMATIONS",
+      "printed_page": 35,
+      "sections": [
+        {
+          "section": "3.1",
+          "title": "USING THE POISSON DISTRIBUTION TO APPROXIMATE THE BINOMIAL DISTRIBUTION",
+          "printed_page": 36,
+          "located": true,
+          "pdf_page": 46
+        },
+        {
+          "section": "3.2",
+          "title": "APPROXIMATING A BINOMIAL DISTRIBUTION",
+          "printed_page": 39,
+          "located": true,
+          "pdf_page": 49
+        },
+        {
+          "section": "3.3",
+          "title": "APPROXIMATING A POISSON DISTRIBUTION BY A NORMAL DISTRIBUTION",
+          "printed_page": 42,
+          "located": true,
+          "pdf_page": 52
+        },
+        {
+          "section": "3.4",
+          "title": "CHOOSING THE APPROPRIATE APPROXIMATION",
+          "printed_page": 44,
+          "located": true,
+          "pdf_page": 54
+        },
+        {
+          "label": "CHAPTER REVIEW 3",
+          "printed_page": 45,
+          "pdf_page": 55,
+          "located": false
+        }
+      ],
+      "pdf_page": 45
+    },
+    {
+      "chapter": 4,
+      "title": "CONTINUOUS RANDOM VARIABLES",
+      "printed_page": 49,
+      "sections": [
+        {
+          "section": "4.1",
+          "title": "CONTINUOUS RANDOM VARIABLES",
+          "printed_page": 50,
+          "located": true,
+          "pdf_page": 60
+        },
+        {
+          "section": "4.2",
+          "title": "THE CUMULATIVE DISTRIBUTION FUNCTION",
+          "printed_page": 56,
+          "located": true,
+          "pdf_page": 66
+        },
+        {
+          "section": "4.3",
+          "title": "MEAN AND VARIANCE OF A CONTINUOUS DISTRIBUTION",
+          "printed_page": 61,
+          "located": true,
+          "pdf_page": 71
+        },
+        {
+          "section": "4.4",
+          "title": "MODE, MEDIAN, QUARTILES AND PERCENTILES",
+          "printed_page": 67,
+          "located": true,
+          "pdf_page": 77
+        },
+        {
+          "label": "CHAPTER REVIEW 4",
+          "printed_page": 76,
+          "pdf_page": 86,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 1",
+          "printed_page": 83,
+          "pdf_page": 93,
+          "located": false
+        }
+      ],
+      "pdf_page": 59
+    },
+    {
+      "chapter": 5,
+      "title": "CONTINUOUS UNIFORM DISTRIBUTION",
+      "printed_page": 87,
+      "sections": [
+        {
+          "section": "5.1",
+          "title": "THE CONTINUOUS UNIFORM DISTRIBUTION",
+          "printed_page": 88,
+          "located": true,
+          "pdf_page": 105
+        },
+        {
+          "section": "5.2",
+          "title": "MODELLING WITH THE CONTINUOUS UNIFORM DISTRIBUTION",
+          "printed_page": 95,
+          "located": true,
+          "pdf_page": 105
+        },
+        {
+          "label": "CHAPTER REVIEW 5",
+          "printed_page": 99,
+          "pdf_page": 116,
+          "located": false
+        }
+      ],
+      "pdf_page": 104
+    },
+    {
+      "chapter": 6,
+      "title": "SAMPLING AND SAMPLING DISTRIBUTIONS",
+      "printed_page": 102,
+      "sections": [
+        {
+          "section": "6.1",
+          "title": "POPULATIONS AND SAMPLES",
+          "printed_page": 103,
+          "located": true,
+          "pdf_page": 113
+        },
+        {
+          "section": "6.2",
+          "title": "THE CONCEPT OF A STATISTIC",
+          "printed_page": 104,
+          "located": true,
+          "pdf_page": 114
+        },
+        {
+          "section": "6.3",
+          "title": "THE SAMPLING DISTRIBUTION OF A STATISTIC",
+          "printed_page": 105,
+          "located": true,
+          "pdf_page": 115
+        },
+        {
+          "label": "CHAPTER REVIEW 6",
+          "printed_page": 109,
+          "pdf_page": 119,
+          "located": false
+        }
+      ],
+      "pdf_page": 112
+    },
+    {
+      "chapter": 7,
+      "title": "HYPOTHESIS TESTING",
+      "printed_page": 112,
+      "sections": [
+        {
+          "section": "7.1",
+          "title": "HYPOTHESIS TESTING",
+          "printed_page": 113,
+          "located": true,
+          "pdf_page": 123
+        },
+        {
+          "section": "7.2",
+          "title": "FINDING CRITICAL VALUES",
+          "printed_page": 115,
+          "located": true,
+          "pdf_page": 125
+        },
+        {
+          "section": "7.3",
+          "title": "ONE-TAILED TESTS",
+          "printed_page": 119,
+          "located": true,
+          "pdf_page": 129
+        },
+        {
+          "section": "7.4",
+          "title": "TWO-TAILED TESTS",
+          "printed_page": 121,
+          "located": true,
+          "pdf_page": 131
+        },
+        {
+          "section": "7.5",
+          "title": "TESTING THE MEAN A OF A POISSON DISTRIBUTION",
+          "printed_page": 123,
+          "located": true,
+          "pdf_page": 133
+        },
+        {
+          "section": "7.6",
+          "title": "USING APPROXIMATIONS",
+          "printed_page": 125,
+          "located": true,
+          "pdf_page": 135
+        },
+        {
+          "label": "CHAPTER REVIEW 7",
+          "printed_page": 127,
+          "pdf_page": 137,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 2",
+          "printed_page": 132,
+          "pdf_page": 142,
+          "located": false
+        },
+        {
+          "label": "EXAM PRACTICE BINOMIAL CUMULATIVE DISTRIBUTION TABLES POISSON CUMULATIVE DISTRIBUTION TABLE",
+          "printed_page": 144,
+          "pdf_page": 154,
+          "located": false
+        },
+        {
+          "label": "GLOSSARY",
+          "printed_page": 145,
+          "pdf_page": 155,
+          "located": false
+        },
+        {
+          "label": "ANSWERS",
+          "printed_page": 147,
+          "pdf_page": 157,
+          "located": false
+        },
+        {
+          "label": "INDEX",
+          "printed_page": 163,
+          "pdf_page": 173,
+          "located": false
+        }
+      ],
+      "pdf_page": 122
+    }
+  ],
+  "unit": "Statistics 2",
+  "exam_board": "Edexcel",
+  "qualification": "International A Level Mathematics",
+  "sections_located": 26,
+  "sections_total": 26
+}

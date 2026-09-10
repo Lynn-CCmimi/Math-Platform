@@ -1,0 +1,386 @@
+{
+  "slug": "edexcel-ial-m1",
+  "source_pdf": "/Users/qingzhuling/Desktop/学习材料/Alevel/Edexcel Math/教材/Edexcel International A Level Mathematics Mechanics 1 Student Book by Greg Attwood (z-lib.org).pdf",
+  "page_count": 178,
+  "page_offset": 9,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "MATHEMATICAL MODELS IN MECHANICS",
+      "printed_page": 1,
+      "sections": [
+        {
+          "section": "1.1",
+          "title": "CONSTRUCTING A MODEL",
+          "printed_page": 2,
+          "pdf_page": 12,
+          "located": false
+        },
+        {
+          "section": "1.2",
+          "title": "MODELLING ASSUMPTIONS",
+          "printed_page": 4,
+          "pdf_page": 14,
+          "located": true
+        },
+        {
+          "section": "1.3",
+          "title": "QUANTITIES AND UNITS",
+          "printed_page": 6,
+          "pdf_page": 16,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 1",
+          "printed_page": 8,
+          "pdf_page": 18,
+          "located": false
+        }
+      ],
+      "pdf_page": 11,
+      "located": true
+    },
+    {
+      "chapter": 2,
+      "title": "CONSTANT ACCELERATION",
+      "printed_page": 10,
+      "sections": [
+        {
+          "section": "2.1",
+          "title": "DISPLACEMENT-TIME GRAPHS",
+          "printed_page": 11,
+          "pdf_page": 21,
+          "located": true
+        },
+        {
+          "section": "2.2",
+          "title": "VELOCITY-TIME GRAPHS",
+          "printed_page": 13,
+          "pdf_page": 23,
+          "located": true
+        },
+        {
+          "section": "2.3",
+          "title": "ACCELERATION-TIME GRAPHS",
+          "printed_page": 17,
+          "pdf_page": 27,
+          "located": true
+        },
+        {
+          "section": "2.4",
+          "title": "CONSTANT ACCELERATION FORMULAE 1",
+          "printed_page": 19,
+          "pdf_page": 29,
+          "located": true
+        },
+        {
+          "section": "2.5",
+          "title": "CONSTANT ACCELERATION FORMULAE 2",
+          "printed_page": 24,
+          "pdf_page": 34,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 2",
+          "printed_page": 35,
+          "pdf_page": 45,
+          "located": false
+        },
+        {
+          "section": "2.6",
+          "title": "VERTICAL MOTION UNDER GRAVITY",
+          "printed_page": 90,
+          "pdf_page": 100,
+          "located": false
+        }
+      ],
+      "pdf_page": 20,
+      "located": true
+    },
+    {
+      "chapter": 3,
+      "title": "VECTORS IN MECHANICS",
+      "printed_page": 39,
+      "sections": [
+        {
+          "section": "3.1",
+          "title": "WORKING WITH VECTORS",
+          "printed_page": 40,
+          "pdf_page": 50,
+          "located": true
+        },
+        {
+          "section": "3.2",
+          "title": "SOLVING PROBLEMS WITH VECTORS WRITTEN USING I AND J NOTATION",
+          "printed_page": 42,
+          "pdf_page": 53,
+          "located": true
+        },
+        {
+          "section": "3.3",
+          "title": "THE VELOCITY OF A PARTICLE AS A VECTOR",
+          "printed_page": 45,
+          "pdf_page": 56,
+          "located": true
+        },
+        {
+          "section": "3.4",
+          "title": "SOLVING PROBLEMS INVOLVING VELOCITY AND TIME USING VECTORS",
+          "printed_page": 46,
+          "pdf_page": 56,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 3",
+          "printed_page": 50,
+          "pdf_page": 60,
+          "located": false
+        }
+      ],
+      "pdf_page": 49,
+      "located": true
+    },
+    {
+      "chapter": 4,
+      "title": "DYNAMICS OF A PARTICLE MOVING IN A STRAIGHT LINE",
+      "printed_page": 54,
+      "sections": [
+        {
+          "section": "4.1",
+          "title": "FORCE DIAGRAMS",
+          "printed_page": 55,
+          "pdf_page": 65,
+          "located": true
+        },
+        {
+          "section": "4.2",
+          "title": "FORCES AS VECTORS",
+          "printed_page": 58,
+          "pdf_page": 68,
+          "located": true
+        },
+        {
+          "section": "4.3",
+          "title": "FORCES AND ACCELERATION",
+          "printed_page": 60,
+          "pdf_page": 70,
+          "located": true
+        },
+        {
+          "section": "4.4",
+          "title": "MOTION IN TWO DIMENSIONS",
+          "printed_page": 64,
+          "pdf_page": 74,
+          "located": true
+        },
+        {
+          "section": "4.6",
+          "title": "PULLEYS",
+          "printed_page": 71,
+          "pdf_page": 81,
+          "located": false
+        },
+        {
+          "label": "CHAPTER REVIEW 4",
+          "printed_page": 75,
+          "pdf_page": 85,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 1",
+          "printed_page": 79,
+          "pdf_page": 89,
+          "located": false
+        }
+      ],
+      "pdf_page": 64,
+      "located": true
+    },
+    {
+      "chapter": 5,
+      "title": "FORCES AND FRICTION",
+      "printed_page": 84,
+      "sections": [
+        {
+          "section": "5.1",
+          "title": "RESOLVING FORCES",
+          "printed_page": 85,
+          "pdf_page": 95,
+          "located": true
+        },
+        {
+          "section": "5.2",
+          "title": "INCLINED PLANES",
+          "printed_page": 90,
+          "pdf_page": 100,
+          "located": true
+        },
+        {
+          "section": "5.3",
+          "title": "FRICTION",
+          "printed_page": 94,
+          "pdf_page": 104,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 5",
+          "printed_page": 99,
+          "pdf_page": 109,
+          "located": false
+        }
+      ],
+      "pdf_page": 94,
+      "located": true
+    },
+    {
+      "chapter": 6,
+      "title": "MOMENTUM AND IMPULSE",
+      "printed_page": 101,
+      "sections": [
+        {
+          "section": "6.1",
+          "title": "MOMENTUM IN ONE DIMENSION",
+          "printed_page": 102,
+          "pdf_page": 112,
+          "located": true
+        },
+        {
+          "section": "6.2",
+          "title": "CONSERVATION OF MOMENTUM",
+          "printed_page": 104,
+          "pdf_page": 114,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 6",
+          "printed_page": 109,
+          "pdf_page": 119,
+          "located": false
+        }
+      ],
+      "pdf_page": 111,
+      "located": false
+    },
+    {
+      "chapter": 7,
+      "title": "STATICS OF A PARTICLE",
+      "printed_page": 112,
+      "sections": [
+        {
+          "section": "7.1",
+          "title": "STATIC PARTICLES",
+          "printed_page": 113,
+          "pdf_page": 123,
+          "located": true
+        },
+        {
+          "section": "7.2",
+          "title": "MODELLING WITH STATICS",
+          "printed_page": 117,
+          "pdf_page": 127,
+          "located": true
+        },
+        {
+          "section": "7.3",
+          "title": "FRICTION AND STATIC PARTICLES",
+          "printed_page": 121,
+          "pdf_page": 131,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 7",
+          "printed_page": 126,
+          "pdf_page": 136,
+          "located": false
+        }
+      ],
+      "pdf_page": 122,
+      "located": true
+    },
+    {
+      "chapter": 8,
+      "title": "MOMENTS",
+      "printed_page": 129,
+      "sections": [
+        {
+          "section": "8.1",
+          "title": "MOMENTS",
+          "printed_page": 130,
+          "pdf_page": 140,
+          "located": false
+        },
+        {
+          "section": "8.2",
+          "title": "RESULTANT MOMENTS",
+          "printed_page": 132,
+          "pdf_page": 142,
+          "located": true
+        },
+        {
+          "section": "8.3",
+          "title": "EQUILIBRIUM",
+          "printed_page": 133,
+          "pdf_page": 143,
+          "located": true
+        },
+        {
+          "section": "8.4",
+          "title": "CENTRES OF MASS",
+          "printed_page": 136,
+          "pdf_page": 146,
+          "located": true
+        },
+        {
+          "section": "8.5",
+          "title": "TILTING",
+          "printed_page": 139,
+          "pdf_page": 149,
+          "located": false
+        },
+        {
+          "label": "CHAPTER REVIEW 8",
+          "printed_page": 141,
+          "pdf_page": 151,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 2",
+          "printed_page": 146,
+          "pdf_page": 156,
+          "located": false
+        },
+        {
+          "label": "EXAM PRACTICE",
+          "printed_page": 150,
+          "pdf_page": 160,
+          "located": false
+        },
+        {
+          "label": "GLOSSARY",
+          "printed_page": 153,
+          "pdf_page": 163,
+          "located": false
+        },
+        {
+          "label": "ANSWERS",
+          "printed_page": 155,
+          "pdf_page": 165,
+          "located": false
+        },
+        {
+          "label": "INDEX",
+          "printed_page": 166,
+          "pdf_page": 176,
+          "located": false
+        }
+      ],
+      "pdf_page": 139,
+      "located": false
+    }
+  ],
+  "unit": "Mechanics 1",
+  "exam_board": "Edexcel",
+  "qualification": "International A Level Mathematics",
+  "sections_located": 26,
+  "sections_total": 31
+}

@@ -1,0 +1,329 @@
+{
+  "slug": "edexcel-ial-m2",
+  "source_pdf": "/Users/qingzhuling/Desktop/学习材料/Alevel/Edexcel Math/教材/Edexcel International A Level Mathematics Mechanics 2 Student Book (z-lib.org).pdf",
+  "page_count": 200,
+  "page_offset": 9,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "PROJECTILES",
+      "printed_page": 1,
+      "sections": [
+        {
+          "section": "1.1",
+          "title": "HORIZONTAL PROJECTION",
+          "printed_page": 2,
+          "pdf_page": 12,
+          "located": false
+        },
+        {
+          "section": "1.2",
+          "title": "HORIZONTAL AND VERTICAL COMPONENTS",
+          "printed_page": 5,
+          "pdf_page": 15,
+          "located": true
+        },
+        {
+          "section": "1.3",
+          "title": "PROJECTION AT ANY ANGLE",
+          "printed_page": 8,
+          "pdf_page": 18,
+          "located": true
+        },
+        {
+          "section": "1.4",
+          "title": "PROJECTILE MOTION FORMULAE",
+          "printed_page": 14,
+          "pdf_page": 24,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 1",
+          "printed_page": 19,
+          "pdf_page": 29,
+          "located": false
+        }
+      ],
+      "pdf_page": 11,
+      "located": true
+    },
+    {
+      "chapter": 2,
+      "title": "VARIABLE ACCELERATION",
+      "printed_page": 24,
+      "sections": [
+        {
+          "section": "2.1",
+          "title": "FUNCTIONS OF TIME",
+          "printed_page": 25,
+          "pdf_page": 35,
+          "located": true
+        },
+        {
+          "section": "2.2",
+          "title": "USING DIFFERENTIATION",
+          "printed_page": 28,
+          "pdf_page": 38,
+          "located": true
+        },
+        {
+          "section": "2.3",
+          "title": "USING INTEGRATION",
+          "printed_page": 33,
+          "pdf_page": 43,
+          "located": true
+        },
+        {
+          "section": "2.4",
+          "title": "DIFFERENTIATING VECTORS",
+          "printed_page": 37,
+          "pdf_page": 47,
+          "located": true
+        },
+        {
+          "section": "2.5",
+          "title": "INTEGRATING VECTORS",
+          "printed_page": 39,
+          "pdf_page": 49,
+          "located": true
+        },
+        {
+          "section": "2.6",
+          "title": "CONSTANT ACCELERATION FORMULAE",
+          "printed_page": 43,
+          "pdf_page": 53,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 2",
+          "printed_page": 45,
+          "pdf_page": 55,
+          "located": false
+        }
+      ],
+      "pdf_page": 34,
+      "located": true
+    },
+    {
+      "chapter": 3,
+      "title": "CENTRES OF MASS",
+      "printed_page": 50,
+      "sections": [
+        {
+          "section": "3.1",
+          "title": "CENTRE OF MASS OF A SET OF PARTICLES ON A STRAIGHT LINE",
+          "printed_page": 51,
+          "pdf_page": 61,
+          "located": true
+        },
+        {
+          "section": "3.2",
+          "title": "CENTRE OF MASS OF A SET OF PARTICLES ARRANGED IN A PLANE",
+          "printed_page": 53,
+          "pdf_page": 63,
+          "located": true
+        },
+        {
+          "section": "3.3",
+          "title": "CENTRES OF MASS OF STANDARD UNIFORM PLANE LAMINAS",
+          "printed_page": 57,
+          "pdf_page": 67,
+          "located": true
+        },
+        {
+          "section": "3.4",
+          "title": "CENTRE OF MASS OF A COMPOSITE LAMINA",
+          "printed_page": 61,
+          "pdf_page": 71,
+          "located": true
+        },
+        {
+          "section": "3.5",
+          "title": "CENTRE OF MASS OF A FRAMEWORK",
+          "printed_page": 68,
+          "pdf_page": 78,
+          "located": true
+        },
+        {
+          "section": "3.6",
+          "title": "LAMINAS IN EQUILIBRIUM",
+          "printed_page": 72,
+          "pdf_page": 82,
+          "located": true
+        },
+        {
+          "section": "3.7",
+          "title": "FRAMEWORKS IN EQUILIBRIUM",
+          "printed_page": 79,
+          "pdf_page": 89,
+          "located": true
+        },
+        {
+          "section": "3.8",
+          "title": "NON-UNIFORM COMPOSITE LAMINAS AND FRAMEWORKS",
+          "printed_page": 83,
+          "pdf_page": 93,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 3",
+          "printed_page": 87,
+          "pdf_page": 97,
+          "located": false
+        }
+      ],
+      "pdf_page": 60,
+      "located": true
+    },
+    {
+      "chapter": 4,
+      "title": "WORK AND ENERGY",
+      "printed_page": 98,
+      "sections": [
+        {
+          "section": "4.1",
+          "title": "WORK DONE",
+          "printed_page": 99,
+          "pdf_page": 109,
+          "located": true
+        },
+        {
+          "section": "4.3",
+          "title": "CONSERVATION OF MECHANICAL ENERGY AND WORK-ENERGY PRINCIPLE",
+          "printed_page": 107,
+          "pdf_page": 117,
+          "located": true
+        },
+        {
+          "section": "4.4",
+          "title": "POWER",
+          "printed_page": 111,
+          "pdf_page": 121,
+          "located": false
+        },
+        {
+          "label": "CHAPTER REVIEW 4",
+          "printed_page": 116,
+          "pdf_page": 126,
+          "located": false
+        },
+        {
+          "section": "4.2",
+          "title": "KINETIC AND POTENTIAL ENERGY",
+          "printed_page": 157,
+          "pdf_page": 167,
+          "located": false
+        }
+      ],
+      "pdf_page": 108,
+      "located": true
+    },
+    {
+      "chapter": 5,
+      "title": "IMPULSES AND COLLISIONS",
+      "printed_page": 121,
+      "sections": [
+        {
+          "section": "5.1",
+          "title": "MOMENTUM AS A VECTOR",
+          "printed_page": 122,
+          "pdf_page": 132,
+          "located": true
+        },
+        {
+          "section": "5.2",
+          "title": "DIRECT IMPACT AND NEWTON'S LAW OF RESTITUTION",
+          "printed_page": 125,
+          "pdf_page": 135,
+          "located": true
+        },
+        {
+          "section": "5.3",
+          "title": "DIRECT COLLISION WITH A SMOOTH PLANE",
+          "printed_page": 131,
+          "pdf_page": 141,
+          "located": true
+        },
+        {
+          "section": "5.4",
+          "title": "LOSS OF KINETIC ENERGY",
+          "printed_page": 134,
+          "pdf_page": 144,
+          "located": true
+        },
+        {
+          "section": "5.5",
+          "title": "SUCCESSIVE DIRECT IMPACTS",
+          "printed_page": 140,
+          "pdf_page": 150,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 5",
+          "printed_page": 146,
+          "pdf_page": 156,
+          "located": false
+        }
+      ],
+      "pdf_page": 131,
+      "located": true
+    },
+    {
+      "chapter": 6,
+      "title": "STATICS OF RIGID BODIES",
+      "printed_page": 151,
+      "sections": [
+        {
+          "section": "6.1",
+          "title": "STATIC RIGID BODIES",
+          "printed_page": 152,
+          "pdf_page": 162,
+          "located": true
+        },
+        {
+          "label": "CHAPTER REVIEW 6",
+          "printed_page": 157,
+          "pdf_page": 167,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 2",
+          "printed_page": 160,
+          "pdf_page": 170,
+          "located": false
+        },
+        {
+          "label": "EXAM PRACTICE",
+          "printed_page": 171,
+          "pdf_page": 181,
+          "located": false
+        },
+        {
+          "label": "GLOSSARY",
+          "printed_page": 173,
+          "pdf_page": 183,
+          "located": false
+        },
+        {
+          "label": "ANSWERS",
+          "printed_page": 175,
+          "pdf_page": 185,
+          "located": false
+        },
+        {
+          "label": "INDEX",
+          "printed_page": 189,
+          "pdf_page": 199,
+          "located": false
+        }
+      ],
+      "pdf_page": 161,
+      "located": true
+    }
+  ],
+  "unit": "Mechanics 2",
+  "exam_board": "Edexcel",
+  "qualification": "International A Level Mathematics",
+  "sections_located": 25,
+  "sections_total": 28
+}

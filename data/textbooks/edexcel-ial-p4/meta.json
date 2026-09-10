@@ -1,0 +1,357 @@
+{
+  "slug": "edexcel-ial-p4",
+  "source_pdf": "/Users/qingzhuling/Desktop/学习材料/Alevel/Edexcel Math/教材/Edexcel International A Level Mathematics Pure 4 Mathematics Student Book by Skrakowski, Joe (z-lib.org).pdf",
+  "page_count": 193,
+  "page_offset": 10,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "PROOF",
+      "printed_page": 1,
+      "sections": [
+        {
+          "section": "1.1",
+          "title": "PROOF BY CONTRADICTION",
+          "printed_page": 2,
+          "located": true,
+          "pdf_page": 13
+        },
+        {
+          "label": "CHAPTER REVIEW 1",
+          "printed_page": 5,
+          "pdf_page": 16,
+          "located": false
+        }
+      ],
+      "pdf_page": 12
+    },
+    {
+      "chapter": 2,
+      "title": "PARTIAL FRACTIONS",
+      "printed_page": 6,
+      "sections": [
+        {
+          "section": "2.1",
+          "title": "PARTIAL FRACTIONS",
+          "printed_page": 7,
+          "located": true,
+          "pdf_page": 18
+        },
+        {
+          "section": "2.2",
+          "title": "REPEATED FACTORS",
+          "printed_page": 10,
+          "located": true,
+          "pdf_page": 21
+        },
+        {
+          "section": "2.3",
+          "title": "IMPROPER FRACTIONS",
+          "printed_page": 12,
+          "located": true,
+          "pdf_page": 23
+        },
+        {
+          "label": "CHAPTER REVIEW 2",
+          "printed_page": 14,
+          "pdf_page": 25,
+          "located": false
+        }
+      ],
+      "pdf_page": 17
+    },
+    {
+      "chapter": 3,
+      "title": "COORDINATE GEOMETRY IN THE (x, y) PLANE",
+      "printed_page": 16,
+      "sections": [
+        {
+          "section": "3.1",
+          "title": "PARAMETRIC EQUATIONS",
+          "printed_page": 17,
+          "located": true,
+          "pdf_page": 28
+        },
+        {
+          "section": "3.2",
+          "title": "USING TRIGONOMETRIC IDENTITIES",
+          "printed_page": 21,
+          "located": true,
+          "pdf_page": 32
+        },
+        {
+          "section": "3.3",
+          "title": "CURVE SKETCHING",
+          "printed_page": 25,
+          "located": true,
+          "pdf_page": 36
+        },
+        {
+          "label": "CHAPTER REVIEW 3",
+          "printed_page": 28,
+          "pdf_page": 39,
+          "located": false
+        }
+      ],
+      "pdf_page": 27
+    },
+    {
+      "chapter": 4,
+      "title": "BINOMIAL EXPANSION",
+      "printed_page": 30,
+      "sections": [
+        {
+          "section": "4.2",
+          "title": "EXPANDING (a +bx)\"",
+          "printed_page": 36,
+          "located": false,
+          "pdf_page": 47
+        },
+        {
+          "section": "4.3",
+          "title": "USING PARTIAL FRACTIONS",
+          "printed_page": 40,
+          "located": true,
+          "pdf_page": 51
+        },
+        {
+          "label": "CHAPTER REVIEW 4",
+          "printed_page": 43,
+          "pdf_page": 54,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 1",
+          "printed_page": 46,
+          "pdf_page": 57,
+          "located": false
+        }
+      ],
+      "pdf_page": 41
+    },
+    {
+      "chapter": 5,
+      "title": "DIFFERENTIATION",
+      "printed_page": 50,
+      "sections": [
+        {
+          "section": "5.1",
+          "title": "PARAMETRIC DIFFERENTIATION",
+          "printed_page": 51,
+          "located": true,
+          "pdf_page": 62
+        },
+        {
+          "section": "5.2",
+          "title": "IMPLICIT DIFFERENTIATION",
+          "printed_page": 54,
+          "located": true,
+          "pdf_page": 65
+        },
+        {
+          "section": "5.3",
+          "title": "RATES OF CHANGE",
+          "printed_page": 57,
+          "located": true,
+          "pdf_page": 68
+        },
+        {
+          "label": "CHAPTER REVIEW 5",
+          "printed_page": 61,
+          "pdf_page": 72,
+          "located": false
+        }
+      ],
+      "pdf_page": 61
+    },
+    {
+      "chapter": 6,
+      "title": "INTEGRATION",
+      "printed_page": 66,
+      "sections": [
+        {
+          "section": "6.1",
+          "title": "FINDING THE AREA UNDER A CURVE DEFINED PARAMETRICALLY",
+          "printed_page": 67,
+          "located": true,
+          "pdf_page": 78
+        },
+        {
+          "section": "6.2",
+          "title": "VOLUMES OF REVOLUTION AROUND THE X-AXIS",
+          "printed_page": 68,
+          "located": true,
+          "pdf_page": 79
+        },
+        {
+          "section": "6.3",
+          "title": "INTEGRATION BY SUBSTITUTION",
+          "printed_page": 74,
+          "located": true,
+          "pdf_page": 85
+        },
+        {
+          "section": "6.4",
+          "title": "INTEGRATION BY PARTS",
+          "printed_page": 78,
+          "located": true,
+          "pdf_page": 89
+        },
+        {
+          "section": "6.5",
+          "title": "PARTIAL FRACTIONS",
+          "printed_page": 81,
+          "located": true,
+          "pdf_page": 92
+        },
+        {
+          "section": "6.6",
+          "title": "SOLVING DIFFERENTIAL EQUATIONS",
+          "printed_page": 84,
+          "located": true,
+          "pdf_page": 95
+        },
+        {
+          "section": "6.7",
+          "title": "MODELLING WITH DIFFERENTIAL EQUATIONS",
+          "printed_page": 88,
+          "located": true,
+          "pdf_page": 99
+        },
+        {
+          "label": "CHAPTER REVIEW 6",
+          "printed_page": 92,
+          "pdf_page": 103,
+          "located": false
+        }
+      ],
+      "pdf_page": 77
+    },
+    {
+      "chapter": 7,
+      "title": "VECTORS",
+      "printed_page": 97,
+      "sections": [
+        {
+          "section": "7.1",
+          "title": "VECTORS",
+          "printed_page": 98,
+          "located": false,
+          "pdf_page": 109
+        },
+        {
+          "section": "7.2",
+          "title": "REPRESENTING VECTORS",
+          "printed_page": 102,
+          "located": true,
+          "pdf_page": 113
+        },
+        {
+          "section": "7.3",
+          "title": "MAGNITUDE AND DIRECTION",
+          "printed_page": 106,
+          "located": true,
+          "pdf_page": 117
+        },
+        {
+          "section": "7.4",
+          "title": "VECTORS IN 3D",
+          "printed_page": 109,
+          "located": true,
+          "pdf_page": 120
+        },
+        {
+          "section": "7.5",
+          "title": "SOLVING GEOMETRIC PROBLEMS IN TWO DIMENSIONS",
+          "printed_page": 114,
+          "located": true,
+          "pdf_page": 125
+        },
+        {
+          "section": "7.6",
+          "title": "SOLVING GEOMETRIC PROBLEMS IN THREE DIMENSIONS",
+          "printed_page": 117,
+          "located": true,
+          "pdf_page": 128
+        },
+        {
+          "section": "7.7",
+          "title": "POSITION VECTORS",
+          "printed_page": 121,
+          "located": true,
+          "pdf_page": 132
+        },
+        {
+          "section": "7.8",
+          "title": "3D COORDINATES",
+          "printed_page": 123,
+          "located": true,
+          "pdf_page": 134
+        },
+        {
+          "section": "7.9",
+          "title": "EQUATION OF A LINE IN THREE DIMENSIONS",
+          "printed_page": 125,
+          "located": true,
+          "pdf_page": 136
+        },
+        {
+          "section": "7.10",
+          "title": "POINTS OF INTERSECTION",
+          "printed_page": 131,
+          "located": true,
+          "pdf_page": 142
+        },
+        {
+          "section": "7.11",
+          "title": "SCALAR PRODUCT",
+          "printed_page": 133,
+          "located": true,
+          "pdf_page": 144
+        },
+        {
+          "label": "CHAPTER REVIEW 7",
+          "printed_page": 140,
+          "pdf_page": 151,
+          "located": false
+        },
+        {
+          "label": "REVIEW EXERCISE 2",
+          "printed_page": 148,
+          "pdf_page": 159,
+          "located": false
+        },
+        {
+          "label": "EXAM PRACTICE",
+          "printed_page": 153,
+          "pdf_page": 164,
+          "located": false
+        },
+        {
+          "label": "GLOSSARY",
+          "printed_page": 155,
+          "pdf_page": 166,
+          "located": false
+        },
+        {
+          "label": "ANSWERS",
+          "printed_page": 159,
+          "pdf_page": 170,
+          "located": false
+        },
+        {
+          "label": "INDEX",
+          "printed_page": 179,
+          "pdf_page": 190,
+          "located": false
+        }
+      ],
+      "pdf_page": 108
+    }
+  ],
+  "unit": "Pure Mathematics 4",
+  "exam_board": "Edexcel",
+  "qualification": "International A Level Mathematics",
+  "sections_located": 28,
+  "sections_total": 30
+}
