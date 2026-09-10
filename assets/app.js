@@ -1,5 +1,5 @@
-import * as db from './db.js?v=5e8b61ab';
-import * as assign from './assign.js?v=5e8b61ab';
+import * as db from './db.js?v=2bb29acb';
+import * as assign from './assign.js?v=2bb29acb';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -152,7 +152,12 @@ function drawAssignBar() {
   bar.innerHTML = '';
   $('topics').hidden = Boolean(active);
   $('unit').hidden = Boolean(active);
-  if (active) bar.appendChild(assign.banner(active, attempts, closeAssignment));
+  if (active) {
+    bar.appendChild(assign.banner(active, attempts, {
+      onExit: closeAssignment,
+      parts: assign.composition(active, DATA.questions, q => q.topic_titles || []),
+    }));
+  }
 }
 
 function showAssigned(keepId) {

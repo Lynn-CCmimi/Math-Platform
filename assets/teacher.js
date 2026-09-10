@@ -1,5 +1,5 @@
-import * as db from './db.js?v=5e8b61ab';
-import * as assign from './assign.js?v=5e8b61ab';
+import * as db from './db.js?v=2bb29acb';
+import * as assign from './assign.js?v=2bb29acb';
 
 const P = 'data/papers/';
 
