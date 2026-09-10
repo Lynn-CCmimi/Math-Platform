@@ -1,5 +1,6 @@
-import * as db from './db.js?v=2bb29acb';
-import * as assign from './assign.js?v=2bb29acb';
+import * as db from './db.js?v=d2925422';
+import * as assign from './assign.js?v=d2925422';
+import * as photos from './photos.js?v=d2925422';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -273,7 +274,7 @@ function pointGroups(q) {
 function showQuestion(id) {
   const q = DATA.questions.find(x => x.id === id);
   current = q;
-  draft = { result: null, reasons: new Set(), weak: new Set(), blob: null };
+  draft = { result: null, reasons: new Set(), weak: new Set(), up: null };
 
   for (const el of $('qlist').children) {
     if (el.dataset.id) el.setAttribute('aria-current', el.dataset.id === id);
@@ -383,10 +384,8 @@ function renderFollowUp() {
               role="button" aria-pressed="false">${esc(s.label)}</div>`).join('')}
     </div>
 
-    <h3 style="margin-top:16px">订正后拍张照 <span class="hint">照着评分标准改对，再拍</span></h3>
-    <div class="drop" id="drop">点这里拍照或选图片</div>
-    <input type="file" id="file" accept="image/*" capture="environment" hidden>
-    <div id="preview"></div>
+    <h3 style="margin-top:16px">订正后拍张照 <span class="hint">照着评分标准改对，再拍。写了两页就传两张，最多 6 张</span></h3>
+    <div id="shots"></div>
 
     <div style="margin-top:16px">
       <button class="act" id="save">存进错题本</button>
@@ -398,8 +397,7 @@ function renderFollowUp() {
   for (const el of wrap.querySelectorAll('#weak .pick')) {
     el.onclick = () => toggle(el, draft.weak);
   }
-  $('drop').onclick = () => $('file').click();
-  $('file').onchange = onPhoto;
+  draft.up = photos.uploader($('shots'), { onError: toast });
   $('save').onclick = save;
 }
 
@@ -409,32 +407,14 @@ function toggle(el, set) {
   on ? set.add(el.dataset.k) : set.delete(el.dataset.k);
 }
 
-async function onPhoto(e) {
-  const file = e.target.files?.[0];
-  if (!file) return;
-  try {
-    draft.blob = await db.shrink(file);
-    const url = URL.createObjectURL(draft.blob);
-    $('preview').innerHTML = `<div class="shot">
-      <img src="${url}" alt="订正">
-      <button class="plain" id="drop-photo">删掉</button></div>`;
-    $('drop-photo').onclick = () => {
-      draft.blob = null;
-      $('preview').innerHTML = '';
-      $('file').value = '';
-    };
-  } catch (err) {
-    toast(err.message || '照片处理失败');
-  }
-}
 
 async function save() {
   if (!draft.result) return toast('先选一个结果');
   const btn = $('save');
   btn.disabled = true;
   try {
-    let photo = null;
-    if (draft.blob) photo = await db.uploadPhoto(me.id, current.id, draft.blob);
+    const shots = draft.up?.blobs.length
+      ? await photos.uploadAll(me.id, current.id, draft.up.blobs) : [];
     const row = await db.saveAttempt({
       student_id: me.id,
       question_id: current.id,
@@ -442,7 +422,7 @@ async function save() {
       result: draft.result,
       reasons: [...draft.reasons],
       weak_sections: [...draft.weak],
-      photo_path: photo,
+      photo_paths: shots,
     });
     attempts.unshift(row);
     toast(draft.result === 'correct' ? '已记录' : '已存进错题本');
@@ -570,7 +550,7 @@ function renderWrong() {
               a.weak_sections.map(s => DATA.sections[s]
                 ? `<span class="badge w">没掌握：${esc(DATA.sections[s].title)}</span>` : '').join('')
             }</div>` : ''}
-            <div class="qbody" data-load="${esc(q.id)}|${esc(a.photo_path || '')}"></div>
+            <div class="qbody" data-q="${esc(q.id)}" data-a="${a.id}"></div>
           </details>`).join('')}
       </details>`;
     }).join('');
@@ -583,27 +563,26 @@ function renderWrong() {
 
 async function fillWrongBody(item) {
   const body = item.querySelector('.qbody');
-  const [qid, photo] = body.dataset.load.split('|');
-  const q = DATA.questions.find(x => x.id === qid);
-  if (!q) return;
+  const q = DATA.questions.find(x => x.id === body.dataset.q);
+  const a = attempts.find(x => String(x.id) === body.dataset.a);
+  if (!q || !a) return;
 
   body.innerHTML = `
     <img class="paper" loading="lazy" src="${P}${q.images[0]}" alt="题目">
-    ${photo ? '<div class="hint" id="ph-' + qid + '">订正照片加载中…</div>' : ''}
+    <div class="ref"><div class="h">我的订正</div><div data-shots></div></div>
     <div class="ref">${pointGroups(q)}</div>`;
 
-  for (const a of body.querySelectorAll('.ref a')) {
-    a.onclick = () => { tab('Book'); openPage(+a.dataset.p, a.dataset.b); };
+  for (const link of body.querySelectorAll('.ref a')) {
+    link.onclick = () => { tab('Book'); openPage(+link.dataset.p, link.dataset.b); };
   }
-  if (photo) {
-    const slot = body.querySelector('#ph-' + CSS.escape(qid));
-    const url = await db.photoUrl(photo);
-    if (slot) {
-      slot.outerHTML = url
-        ? `<img class="paper" loading="lazy" src="${url}" alt="我的订正">`
-        : '<div class="hint">订正照片打不开了</div>';
-    }
-  }
+  // editable: a blurry shot or a second page should not mean redoing the
+  // question just to attach a better photo
+  await photos.gallery(body.querySelector('[data-shots]'), a, {
+    editable: true,
+    userId: me.id,
+    onChange: (paths, err, action) =>
+      toast(err || (action === 'remove' ? '照片已删除' : '照片已保存')),
+  });
 }
 
 boot();

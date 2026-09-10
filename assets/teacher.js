@@ -1,5 +1,6 @@
-import * as db from './db.js?v=2bb29acb';
-import * as assign from './assign.js?v=2bb29acb';
+import * as db from './db.js?v=d2925422';
+import * as assign from './assign.js?v=d2925422';
+import * as photos from './photos.js?v=d2925422';
 
 const P = 'data/papers/';
 
@@ -185,7 +186,7 @@ async function showStudent(id) {
             `<span class="badge g">${REASON_LABEL[k] || k}</span>`).join('')}
           <span class="n">${day(r.created_at)}</span>
         </summary>
-        <div class="qbody" data-q="${esc(r.question_id)}" data-photo="${esc(r.photo_path || '')}"></div>
+        <div class="qbody" data-q="${esc(r.question_id)}" data-a="${r.id}"></div>
       </details>`;
     }).join('')}`;
 
@@ -197,19 +198,11 @@ async function showStudent(id) {
 async function fillBody(item) {
   const body = item.querySelector('.qbody');
   const q = DATA.questions.find(x => x.id === body.dataset.q);
-  const photo = body.dataset.photo;
+  const a = rows.find(r => String(r.id) === body.dataset.a);
   body.innerHTML =
     (q ? `<img class="paper" loading="lazy" src="${P}${q.images[0]}" alt="题目">` : '')
-    + (photo ? '<div class="hint" data-slot="1">订正照片加载中…</div>' : '');
-  if (photo) {
-    const url = await db.photoUrl(photo);
-    const slot = body.querySelector('[data-slot]');
-    if (slot) {
-      slot.outerHTML = url
-        ? `<img class="paper" loading="lazy" src="${url}" alt="学生订正">`
-        : '<div class="hint">照片打不开</div>';
-    }
-  }
+    + '<div class="ref"><div class="h">学生的订正</div><div data-shots></div></div>';
+  if (a) await photos.gallery(body.querySelector('[data-shots]'), a);
 }
 
 // ------------------------------------------------------- class weak spots
