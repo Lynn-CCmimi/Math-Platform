@@ -1,4 +1,4 @@
-import * as db from './db.js';
+import * as db from './db.js?v=1789027250';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
