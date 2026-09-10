@@ -1,4 +1,5 @@
-import * as db from './db.js?v=1789027250';
+import * as db from './db.js?v=5e8b61ab';
+import * as assign from './assign.js?v=5e8b61ab';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -86,6 +87,9 @@ async function doLogin() {
   }
 }
 
+let ASSIGNMENTS = [];
+let active = null;        // the assignment being worked through, if any
+
 async function start(user) {
   me = await db.profile(user.id);
   attempts = await db.myAttempts();
@@ -95,7 +99,13 @@ async function start(user) {
   $('logout').onclick = async () => { await db.signOut(); location.reload(); };
   $('tabPractice').onclick = () => tab('Practice');
   $('tabBook').onclick = () => tab('Book');
+  $('tabWork').onclick = () => tab('Work');
   $('tabWrong').onclick = () => tab('Wrong');
+
+  ASSIGNMENTS = await db.myAssignments();
+  if (ASSIGNMENTS.some(a => assign.progressOf(a, attempts).done < a.question_ids.length)) {
+    $('tabWork').innerHTML = '作业 <b style="color:var(--bad)">•</b>';
+  }
 
   const order = ['P1', 'P2', 'P3', 'P4', 'M1', 'M2', 'S1', 'S2', 'S3'];
   let units = [...new Set(DATA.questions.map(q => q.unit))];
@@ -108,11 +118,68 @@ async function start(user) {
 }
 
 function tab(name) {
-  for (const key of ['Practice', 'Book', 'Wrong']) {
+  for (const key of ['Practice', 'Book', 'Work', 'Wrong']) {
     $('tab' + key).setAttribute('aria-selected', key === name);
     $('view' + key).hidden = key !== name;
   }
   if (name === 'Wrong') renderWrong();
+  if (name === 'Work') {
+    assign.renderStudentList($('workList'), {
+      assignments: ASSIGNMENTS, attempts, onOpen: openAssignment,
+    });
+  }
+}
+
+// ----------------------------------------------------------- assignments
+// An open assignment takes over the practice list: the unit and topic
+// choosers step aside so the set is exactly what the teacher picked.
+
+function openAssignment(a) {
+  active = a;
+  tab('Practice');
+  drawAssignBar();
+  showAssigned();
+}
+
+function closeAssignment() {
+  active = null;
+  drawAssignBar();
+  selectTopic(topic);
+}
+
+function drawAssignBar() {
+  const bar = $('assignBar');
+  bar.innerHTML = '';
+  $('topics').hidden = Boolean(active);
+  $('unit').hidden = Boolean(active);
+  if (active) bar.appendChild(assign.banner(active, attempts, closeAssignment));
+}
+
+function showAssigned(keepId) {
+  const want = new Set(active.question_ids);
+  const rows = DATA.questions.filter(q => want.has(q.id))
+    .sort((a, b) => a.unit.localeCompare(b.unit)
+      || b.sitting.localeCompare(a.sitting) || a.question - b.question);
+  $('qlist').innerHTML = rows.length
+    ? rows.map(questionRow).join('')
+    : '<div class="empty">这份作业里的题目不在当前题库中</div>';
+  for (const el of $('qlist').children) {
+    if (el.dataset.id) el.onclick = () => showQuestion(el.dataset.id);
+  }
+  // stay on the question just answered instead of jumping back to the top
+  const focus = rows.some(q => q.id === keepId) ? keepId : rows[0]?.id;
+  if (focus) showQuestion(focus);
+}
+
+function questionRow(q) {
+  const st = statusOf(q.id);
+  const dot = st === 'correct' ? 'ok' : st === 'partial' ? 'partial' : st ? 'bad' : '';
+  return `<div class="item" data-id="${q.id}">
+    <span class="dot ${dot}"></span>
+    <span class="q">Q${q.question}</span>
+    <span>${active ? q.unit + ' ' : ''}${q.year} ${session(q)}</span>
+    <span class="meta">${q.topics.length > 1 ? `跨${q.topics.length}点 · ` : ''}${q.marks}分</span>
+  </div>`;
 }
 
 // ------------------------------------------------------- attempts helpers
@@ -165,16 +232,9 @@ function selectTopic(t) {
     .filter(q => q.unit === unit && (q.topics || []).map(String).includes(String(t)))
     .sort((a, b) => b.sitting.localeCompare(a.sitting) || a.question - b.question);
 
-  $('qlist').innerHTML = rows.length ? rows.map(q => {
-    const st = statusOf(q.id);
-    const dot = st === 'correct' ? 'ok' : st === 'partial' ? 'partial' : st ? 'bad' : '';
-    return `<div class="item" data-id="${q.id}">
-      <span class="dot ${dot}"></span>
-      <span class="q">Q${q.question}</span>
-      <span>${q.year} ${session(q)}</span>
-      <span class="meta">${q.topics.length > 1 ? `跨${q.topics.length}点 · ` : ''}${q.marks}分</span>
-    </div>`;
-  }).join('') : '<div class="empty">这个知识点还没有题</div>';
+  $('qlist').innerHTML = rows.length
+    ? rows.map(questionRow).join('')
+    : '<div class="empty">这个知识点还没有题</div>';
 
   for (const el of $('qlist').children) {
     if (el.dataset.id) el.onclick = () => showQuestion(el.dataset.id);
@@ -381,7 +441,12 @@ async function save() {
     });
     attempts.unshift(row);
     toast(draft.result === 'correct' ? '已记录' : '已存进错题本');
-    selectTopic(topic);
+    if (active) {
+      drawAssignBar();
+      showAssigned(current?.id);
+    } else {
+      selectTopic(topic);
+    }
   } catch (err) {
     toast(err.message || '保存失败');
     btn.disabled = false;

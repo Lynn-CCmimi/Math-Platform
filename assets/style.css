@@ -190,3 +190,32 @@ details.grp>summary::marker,details.qitem>summary::marker{content:''}
        background:var(--ink);color:var(--bg);padding:9px 18px;border-radius:9px;
        font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.on{opacity:.94}
+
+/* ---------- SAT: answer entry and auto-marking ---------- */
+.choices{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
+.choice{width:52px;height:44px;border:1.5px solid var(--line);border-radius:9px;
+        background:var(--card);cursor:pointer;font-size:16px;font-weight:700}
+.choice[aria-pressed=true]{border-color:var(--accent);background:var(--accent);color:#fff}
+.choice:disabled{cursor:default;opacity:.45}
+.choice:disabled[aria-pressed=true]{opacity:1}
+.spr{width:190px;padding:10px 12px;border:1.5px solid var(--line);border-radius:9px;
+     background:var(--card);font-size:16px;font-variant-numeric:tabular-nums}
+.spr:disabled{opacity:.7}
+
+.verdict{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px;
+         padding:11px 14px;border-radius:9px;font-size:14px;font-weight:600}
+.verdict.ok{background:var(--accent-soft);color:var(--accent)}
+.verdict.no{background:var(--bad-soft);color:var(--bad)}
+.verdict .key{font-weight:400;font-size:13px;opacity:.85}
+
+.solution{margin-top:12px}
+.solution>summary{cursor:pointer;font-size:13.5px;color:var(--accent);font-weight:600;
+                  padding:6px 0;list-style:none}
+.solution>summary::-webkit-details-marker{display:none}
+.solution>summary::marker{content:''}
+.solution>summary:hover{text-decoration:underline}
+
+.diff{font-size:11px;padding:1px 7px;border-radius:999px;font-weight:600;flex:none}
+.diff.easy{background:var(--accent-soft);color:var(--accent)}
+.diff.medium{background:var(--warn-soft);color:var(--warn)}
+.diff.hard{background:var(--bad-soft);color:var(--bad)}

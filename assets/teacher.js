@@ -1,4 +1,5 @@
-import * as db from './db.js?v=1789027250';
+import * as db from './db.js?v=5e8b61ab';
+import * as assign from './assign.js?v=5e8b61ab';
 
 const P = 'data/papers/';
 
@@ -11,6 +12,7 @@ const RESULTS = { correct: '全对', partial: '部分对', unknown: '不会' };
 let DATA = null;
 let students = [];
 let rows = [];
+let sets = [];
 let picked = null;
 
 const $ = id => document.getElementById(id);
@@ -67,14 +69,17 @@ async function start(user) {
   $('logout').onclick = async () => { await db.signOut(); location.reload(); };
   $('tabClass').onclick = () => tab('Class');
   $('tabWeak').onclick = () => tab('Weak');
+  $('tabAssign').onclick = () => tab('Assign');
 
-  [students, rows] = await Promise.all([db.allStudents(), db.attemptsForClass()]);
+  [students, rows, sets] = await Promise.all(
+    [db.allStudents(), db.attemptsForClass(), db.myAssignments()]);
   renderClass();
   renderWeak();
+  mountAssign();
 }
 
 function tab(name) {
-  for (const key of ['Class', 'Weak']) {
+  for (const key of ['Class', 'Weak', 'Assign']) {
     $('tab' + key).setAttribute('aria-selected', key === name);
     $('view' + key).hidden = key !== name;
   }
@@ -246,6 +251,45 @@ function renderWeak() {
           <span style="width:${Math.round((n / total) * 100)}%"></span></div>
           <span class="hint">${n}</span></div></td></tr>`).join('')}
       </tbody></table>` : '<div class="empty">还没有数据</div>'}`;
+}
+
+// ------------------------------------------------------------- assignments
+// Only the board-specific description lives here; the picker itself is shared.
+
+const UNIT_ORDER = ['P1', 'P2', 'P3', 'P4', 'M1', 'M2', 'S1', 'S2', 'S3'];
+const band = m => (m <= 3 ? '1-3分' : m <= 6 ? '4-6分' : '7分以上');
+
+function mountAssign() {
+  assign.mountPicker($('picker'), {
+    questions: DATA.questions,
+    students,
+    facets: [
+      { id: 'unit', name: '单元', values: q => [q.unit], order: UNIT_ORDER },
+      { id: 'topic', name: '知识点', values: q => q.topic_titles || [] },
+      { id: 'marks', name: '分值', values: q => [band(q.marks)],
+        order: ['1-3分', '4-6分', '7分以上'] },
+    ],
+    label: q => `${q.unit} ${q.year}年${session(q)} 第${q.question}题`,
+    note: q => `${q.marks}分`,
+    preview: q => (q.images || []).map(src => P + src),
+    onSaved: async (row, msg) => {
+      toast(msg);
+      if (row) { sets = await db.myAssignments(); renderAssignList(); }
+    },
+  });
+  renderAssignList();
+}
+
+function renderAssignList() {
+  assign.renderTeacherList($('assignList'), {
+    assignments: sets, attempts: rows, students,
+    onDeleted: async err => {
+      if (err) return toast('删除失败：' + err);
+      sets = await db.myAssignments();
+      renderAssignList();
+      toast('已删除');
+    },
+  });
 }
 
 boot();
