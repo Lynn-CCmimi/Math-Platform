@@ -7,6 +7,8 @@
 
 const CONFIG = window.MATH_PLATFORM_CONFIG || {};
 const EMAIL_DOMAIN = 'student.mathplatform.local';
+// one backend serves several exam boards; keep each site to its own records
+const SUBJECT = 'alevel';
 
 export const configured = Boolean(CONFIG.url && CONFIG.anonKey);
 
@@ -64,6 +66,7 @@ export async function myAttempts() {
   const { data, error } = await db
     .from('attempts')
     .select('*')
+    .eq('subject', SUBJECT)
     .order('created_at', { ascending: false });
   if (error) throw error;
   return data || [];
@@ -73,7 +76,7 @@ export async function saveAttempt(record) {
   const db = await supabase();
   const { data, error } = await db
     .from('attempts')
-    .insert(record)
+    .insert({ ...record, subject: SUBJECT })
     .select()
     .single();
   if (error) throw error;
@@ -148,6 +151,7 @@ export async function attemptsForClass() {
   const { data, error } = await db
     .from('attempts')
     .select('*')
+    .eq('subject', SUBJECT)
     .order('created_at', { ascending: false })
     .limit(5000);
   if (error) throw error;
