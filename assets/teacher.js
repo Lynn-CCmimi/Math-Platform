@@ -1,13 +1,14 @@
-import * as db from './db.js?v=0b0a09e7';
-import * as assign from './assign.js?v=0b0a09e7';
-import * as photos from './photos.js?v=0b0a09e7';
-import * as mock from './mock.js?v=0b0a09e7';
+import * as db from './db.js?v=1c6f4885';
+import * as assign from './assign.js?v=1c6f4885';
+import * as photos from './photos.js?v=1c6f4885';
+import * as mock from './mock.js?v=1c6f4885';
 
 const P = 'data/papers/';
 
 const REASON_LABEL = {
   misread: '看错题', slip: '抄错/算错', unknown: '知识点不会',
-  stuck: '知道方法但卡住', english: '英文没读懂', time: '时间不够',
+  stuck: '知道方法但卡住', working: '跳步', form: '答案形式不对',
+  english: '英文没读懂', time: '时间不够',
 };
 const RESULTS = { correct: '全对', partial: '部分对', unknown: '不会' };
 

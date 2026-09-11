@@ -1,7 +1,7 @@
-import * as db from './db.js?v=0b0a09e7';
-import * as assign from './assign.js?v=0b0a09e7';
-import * as photos from './photos.js?v=0b0a09e7';
-import * as mock from './mock.js?v=0b0a09e7';
+import * as db from './db.js?v=1c6f4885';
+import * as assign from './assign.js?v=1c6f4885';
+import * as photos from './photos.js?v=1c6f4885';
+import * as mock from './mock.js?v=1c6f4885';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -9,15 +9,22 @@ const T = 'data/textbooks/';
 // Why a question went wrong. Short enough that a student actually picks one;
 // "英文没读懂" is separated from the maths so a language gap does not get
 // recorded as a topic they cannot do.
+// Why marks were lost. The first four and last two describe getting a
+// question wrong; the two in the middle are how marks leak from a question
+// that was essentially right - the losses examiners dock most, and the ones
+// a mock paper is meant to surface. A third element is a hint shown with the
+// chip, for the option whose name alone is not enough.
 const REASONS = [
   ['misread', '看错题'],
   ['slip', '抄错/算错'],
   ['unknown', '知识点不会'],
   ['stuck', '知道方法但卡住'],
+  ['working', '跳步'],
+  ['form', '答案形式不对', '没化简 · 没排除增根 · 精确度 · 要 exact value'],
   ['english', '英文没读懂'],
   ['time', '时间不够'],
 ];
-const REASON_LABEL = Object.fromEntries(REASONS);
+const REASON_LABEL = Object.fromEntries(REASONS.map(([k, v]) => [k, v]));
 const ROLE_MARK = { core: ['●', '考点'], technique: ['○', '用到'], prereq: ['◇', '前置'] };
 const RESULTS = { correct: '全对', partial: '部分对', unknown: '不会' };
 
@@ -504,8 +511,9 @@ function renderFollowUp() {
   wrap.innerHTML = `
     <h3 style="margin-top:16px">哪里出了问题？<span class="hint">可多选</span></h3>
     <div class="picks" id="reasons">
-      ${REASONS.map(([k, v]) =>
-        `<div class="pick" data-k="${k}" role="button" aria-pressed="false">${v}</div>`).join('')}
+      ${REASONS.map(([k, v, hint]) =>
+        `<div class="pick" data-k="${k}" role="button" aria-pressed="false">${v}${
+          hint ? `<span class="hint" style="margin-left:7px">${hint}</span>` : ''}</div>`).join('')}
     </div>
 
     <h3 style="margin-top:16px">哪些知识点没掌握？<span class="hint">点亮你不会的</span></h3>
