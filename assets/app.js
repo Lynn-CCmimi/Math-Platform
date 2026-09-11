@@ -1,7 +1,8 @@
-import * as db from './db.js?v=1c6f4885';
-import * as assign from './assign.js?v=1c6f4885';
-import * as photos from './photos.js?v=1c6f4885';
-import * as mock from './mock.js?v=1c6f4885';
+import * as db from './db.js?v=6f0cc6cd';
+import * as assign from './assign.js?v=6f0cc6cd';
+import * as photos from './photos.js?v=6f0cc6cd';
+import * as mock from './mock.js?v=6f0cc6cd';
+import * as analysis from './analysis.js?v=6f0cc6cd';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -114,6 +115,7 @@ async function start(user) {
   $('tabWork').onclick = () => tab('Work');
   $('tabMock').onclick = () => tab('Mock');
   $('tabWrong').onclick = () => tab('Wrong');
+  $('tabAnalysis').onclick = () => tab('Analysis');
 
   [ASSIGNMENTS, MOCKS] = await Promise.all([db.myAssignments(), db.myMockPapers()]);
   if (ASSIGNMENTS.some(a => assign.progressOf(a, attempts).done < a.question_ids.length)) {
@@ -133,12 +135,13 @@ async function start(user) {
 }
 
 function tab(name) {
-  for (const key of ['Practice', 'Book', 'Work', 'Mock', 'Wrong']) {
+  for (const key of ['Practice', 'Book', 'Work', 'Mock', 'Wrong', 'Analysis']) {
     $('tab' + key).setAttribute('aria-selected', key === name);
     $('view' + key).hidden = key !== name;
   }
   if (name === 'Wrong') renderWrong();
   if (name === 'Mock') renderMock();
+  if (name === 'Analysis') renderAnalysis();
   if (name === 'Work') {
     assign.renderStudentList($('workList'), {
       assignments: ASSIGNMENTS, attempts, onOpen: openAssignment,
@@ -171,6 +174,19 @@ function drawAssignBar() {
   $('unit').hidden = Boolean(active || paper);
   if (paper) {
     bar.appendChild(mock.banner(paper, { onExit: closeMock }));
+    if (mock.scoreOf(paper).finished) {
+      const box = document.createElement('div');
+      bar.appendChild(box);
+      mock.renderSummary(box, paper, {
+        questions: DATA.questions, attempts,
+        boundaries: DATA.boundaries,
+        topicsOf: q => q.topics.map(String),
+        topicName: topicTitle,
+        sectionName: sectionTitle,
+        reasonLabel: k => REASON_LABEL[k] || k,
+        onOpen: id => showQuestion(id),
+      });
+    }
     return;
   }
   if (active) {
@@ -200,6 +216,31 @@ function showAssigned(keepId) {
 // ------------------------------------------------------------ mock papers
 // The blueprint comes with the data; generation happens here in the browser,
 // and the paper is saved the moment it exists so a refresh cannot lose it.
+
+let topicNames = null;
+const topicTitle = id => {
+  if (!topicNames) {
+    topicNames = new Map();
+    for (const q of DATA.questions) q.topics.forEach((t, i) => topicNames.set(String(t), q.topic_titles[i]));
+  }
+  return topicNames.get(String(id)) || id;
+};
+const sectionTitle = id => DATA.sections[id]
+  ? `${DATA.sections[id].section} ${DATA.sections[id].title}` : id;
+
+function renderAnalysis() {
+  analysis.render($('analysis'), {
+    attempts, papers: MOCKS,
+    questions: DATA.questions,
+    topicsOf: q => q.topics.map(String),
+    topicName: topicTitle,
+    sectionName: sectionTitle,
+    reasonLabel: k => REASON_LABEL[k] || k,
+    gradeOf: mock.gradeOf,
+    boundaries: DATA.boundaries,
+    onOpenQuestion: id => { tab('Practice'); showQuestion(id); },
+  });
+}
 
 function renderMock() {
   mock.renderList($('mockList'), {

@@ -1,7 +1,7 @@
-import * as db from './db.js?v=1c6f4885';
-import * as assign from './assign.js?v=1c6f4885';
-import * as photos from './photos.js?v=1c6f4885';
-import * as mock from './mock.js?v=1c6f4885';
+import * as db from './db.js?v=6f0cc6cd';
+import * as assign from './assign.js?v=6f0cc6cd';
+import * as photos from './photos.js?v=6f0cc6cd';
+import * as mock from './mock.js?v=6f0cc6cd';
 
 const P = 'data/papers/';
 
