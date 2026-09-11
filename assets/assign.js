@@ -12,7 +12,7 @@
 // note:    q => string     short right-hand note, e.g. difficulty
 // preview: q => string[]   image urls, so the teacher picks by seeing the question
 
-import * as db from './db.js?v=d2925422';
+import * as db from './db.js?v=0b0a09e7';
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

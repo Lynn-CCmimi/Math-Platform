@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A-Level 数学练习</title>
-<link rel="stylesheet" href="assets/style.css?v=d2925422">
+<link rel="stylesheet" href="assets/style.css?v=0b0a09e7">
 <script src="config.js"></script>
 </head>
 <body>
@@ -28,6 +28,7 @@
         <div class="tab" id="tabPractice" role="tab" aria-selected="true">练习</div>
         <div class="tab" id="tabBook" role="tab" aria-selected="false">教材</div>
         <div class="tab" id="tabWork" role="tab" aria-selected="false">作业</div>
+        <div class="tab" id="tabMock" role="tab" aria-selected="false">模拟卷</div>
         <div class="tab" id="tabWrong" role="tab" aria-selected="false">错题本</div>
       </div>
       <span class="spacer"></span>
@@ -50,6 +51,21 @@
       <div id="workList"></div>
     </section>
 
+    <section id="viewMock" hidden>
+      <div class="card" style="margin-bottom:14px">
+        <div class="row">
+          <select id="mockUnit"></select>
+          <button class="act" id="mockGen">生成一套</button>
+          <span class="hint" id="mockHint"></span>
+        </div>
+        <div class="hint" style="margin-top:8px">
+          按真卷的题数、分值走势和知识点比例，从不同年份的真题里各抽一道拼成一套 75 分的卷子。
+          做完一题对一题答案，填自己拿了几分，做完全部出总分。
+        </div>
+      </div>
+      <div id="mockList"></div>
+    </section>
+
     <section id="viewBook" hidden>
       <div class="split">
         <div class="list" id="chapters"></div>
@@ -65,6 +81,6 @@
 </div>
 
 <div class="toast" id="toast"></div>
-<script type="module" src="assets/app.js?v=d2925422"></script>
+<script type="module" src="assets/app.js?v=0b0a09e7"></script>
 </body>
 </html>

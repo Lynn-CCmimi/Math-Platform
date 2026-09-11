@@ -1,6 +1,7 @@
-import * as db from './db.js?v=d2925422';
-import * as assign from './assign.js?v=d2925422';
-import * as photos from './photos.js?v=d2925422';
+import * as db from './db.js?v=0b0a09e7';
+import * as assign from './assign.js?v=0b0a09e7';
+import * as photos from './photos.js?v=0b0a09e7';
+import * as mock from './mock.js?v=0b0a09e7';
 
 const P = 'data/papers/';
 
@@ -14,6 +15,7 @@ let DATA = null;
 let students = [];
 let rows = [];
 let sets = [];
+let papers = [];
 let picked = null;
 
 const $ = id => document.getElementById(id);
@@ -72,8 +74,8 @@ async function start(user) {
   $('tabWeak').onclick = () => tab('Weak');
   $('tabAssign').onclick = () => tab('Assign');
 
-  [students, rows, sets] = await Promise.all(
-    [db.allStudents(), db.attemptsForClass(), db.myAssignments()]);
+  [students, rows, sets, papers] = await Promise.all(
+    [db.allStudents(), db.attemptsForClass(), db.myAssignments(), db.mockPapersForClass()]);
   renderClass();
   renderWeak();
   mountAssign();
@@ -139,9 +141,10 @@ async function showStudent(id) {
   const mine = rows.filter(r => r.student_id === id);
   const st = statsFor(id);
 
+  const myPapers = papers.filter(p => p.student_id === id);
   if (!mine.length) {
     $('detail').innerHTML = `<h2 style="margin:0 0 8px;font-size:16px">${esc(s.display_name)}</h2>
-      <div class="empty">还没有练习记录</div>`;
+      ${mock.renderTeacherRows(myPapers) || '<div class="empty">还没有练习记录</div>'}`;
     return;
   }
 
@@ -172,6 +175,8 @@ async function showStudent(id) {
     ${Object.keys(reasons).length ? `<h3 style="font-size:14px;margin:14px 0 6px">错因分布</h3>
       <div class="picks">${Object.entries(reasons).sort((a, b) => b[1] - a[1]).map(([k, n]) =>
         `<span class="badge g">${REASON_LABEL[k] || k} ×${n}</span>`).join('')}</div>` : ''}
+
+    ${mock.renderTeacherRows(myPapers)}
 
     <h3 style="font-size:14px;margin:16px 0 6px">练习记录</h3>
     ${mine.slice(0, 40).map(r => {

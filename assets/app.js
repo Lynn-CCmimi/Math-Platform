@@ -1,6 +1,7 @@
-import * as db from './db.js?v=d2925422';
-import * as assign from './assign.js?v=d2925422';
-import * as photos from './photos.js?v=d2925422';
+import * as db from './db.js?v=0b0a09e7';
+import * as assign from './assign.js?v=0b0a09e7';
+import * as photos from './photos.js?v=0b0a09e7';
+import * as mock from './mock.js?v=0b0a09e7';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -90,6 +91,9 @@ async function doLogin() {
 
 let ASSIGNMENTS = [];
 let active = null;        // the assignment being worked through, if any
+let MOCKS = [];
+let paper = null;         // the mock paper being worked through, if any
+const UNIT_ORDER = ['P1', 'P2', 'P3', 'P4', 'M1', 'M2', 'S1', 'S2', 'S3'];
 
 async function start(user) {
   me = await db.profile(user.id);
@@ -101,29 +105,33 @@ async function start(user) {
   $('tabPractice').onclick = () => tab('Practice');
   $('tabBook').onclick = () => tab('Book');
   $('tabWork').onclick = () => tab('Work');
+  $('tabMock').onclick = () => tab('Mock');
   $('tabWrong').onclick = () => tab('Wrong');
 
-  ASSIGNMENTS = await db.myAssignments();
+  [ASSIGNMENTS, MOCKS] = await Promise.all([db.myAssignments(), db.myMockPapers()]);
   if (ASSIGNMENTS.some(a => assign.progressOf(a, attempts).done < a.question_ids.length)) {
     $('tabWork').innerHTML = '作业 <b style="color:var(--bad)">•</b>';
   }
 
-  const order = ['P1', 'P2', 'P3', 'P4', 'M1', 'M2', 'S1', 'S2', 'S3'];
   let units = [...new Set(DATA.questions.map(q => q.unit))];
   if (me.units?.length) units = units.filter(u => me.units.includes(u));
-  units.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  units.sort((a, b) => UNIT_ORDER.indexOf(a) - UNIT_ORDER.indexOf(b));
 
   $('unit').innerHTML = units.map(u => `<option>${u}</option>`).join('');
+  $('mockUnit').innerHTML = units.filter(u => DATA.blueprints?.[u])
+    .map(u => `<option>${u}</option>`).join('');
+  $('mockGen').onclick = generateMock;
   $('unit').onchange = () => selectUnit($('unit').value);
   await selectUnit(units[0]);
 }
 
 function tab(name) {
-  for (const key of ['Practice', 'Book', 'Work', 'Wrong']) {
+  for (const key of ['Practice', 'Book', 'Work', 'Mock', 'Wrong']) {
     $('tab' + key).setAttribute('aria-selected', key === name);
     $('view' + key).hidden = key !== name;
   }
   if (name === 'Wrong') renderWrong();
+  if (name === 'Mock') renderMock();
   if (name === 'Work') {
     assign.renderStudentList($('workList'), {
       assignments: ASSIGNMENTS, attempts, onOpen: openAssignment,
@@ -137,6 +145,7 @@ function tab(name) {
 
 function openAssignment(a) {
   active = a;
+  paper = null;
   tab('Practice');
   drawAssignBar();
   showAssigned();
@@ -151,8 +160,12 @@ function closeAssignment() {
 function drawAssignBar() {
   const bar = $('assignBar');
   bar.innerHTML = '';
-  $('topics').hidden = Boolean(active);
-  $('unit').hidden = Boolean(active);
+  $('topics').hidden = Boolean(active || paper);
+  $('unit').hidden = Boolean(active || paper);
+  if (paper) {
+    bar.appendChild(mock.banner(paper, { onExit: closeMock }));
+    return;
+  }
   if (active) {
     bar.appendChild(assign.banner(active, attempts, {
       onExit: closeAssignment,
@@ -177,14 +190,95 @@ function showAssigned(keepId) {
   if (focus) showQuestion(focus);
 }
 
-function questionRow(q) {
+// ------------------------------------------------------------ mock papers
+// The blueprint comes with the data; generation happens here in the browser,
+// and the paper is saved the moment it exists so a refresh cannot lose it.
+
+function renderMock() {
+  mock.renderList($('mockList'), {
+    papers: MOCKS,
+    onOpen: openMock,
+    onDelete: async p => {
+      if (!confirm('删掉这套模拟卷？做过的题仍会留在练习记录里。')) return;
+      try {
+        await db.deleteMockPaper(p.id);
+        MOCKS = MOCKS.filter(x => x.id !== p.id);
+        if (paper?.id === p.id) closeMock();
+        renderMock();
+      } catch (err) { toast(err.message || '删除失败'); }
+    },
+  });
+}
+
+async function generateMock() {
+  const unit = $('mockUnit').value;
+  const bp = DATA.blueprints?.[unit];
+  if (!bp) return toast('这个单元还没有蓝图');
+  const btn = $('mockGen');
+  btn.disabled = true;
+  $('mockHint').textContent = '正在从真题里挑…';
+  try {
+    const done = new Set(attempts.map(a => a.question_id));
+    const pick = mock.generate(bp, DATA.questions.filter(q => q.unit === unit), {
+      marksOf: q => q.marks,
+      topicsOf: q => q.topics.map(String),
+      paperOf: q => q.paper,
+      doneIds: done,
+    });
+    if (!pick) throw new Error('这个单元的题不够拼出一套完整的卷子');
+    const row = await db.saveMockPaper({
+      unit, question_ids: pick.ids, max_marks: bp.total,
+    });
+    MOCKS.unshift(row);
+    $('mockHint').textContent = '';
+    openMock(row);
+  } catch (err) {
+    $('mockHint').textContent = '';
+    toast(err.message || '生成失败');
+  }
+  btn.disabled = false;
+}
+
+function openMock(p) {
+  paper = p;
+  active = null;
+  tab('Practice');
+  drawAssignBar();
+  showPaper();
+}
+
+function closeMock() {
+  paper = null;
+  drawAssignBar();
+  selectTopic(topic);
+}
+
+// The paper's own order is the order to work in: it climbs in marks the way
+// a real paper does. Lands on the first question not yet scored.
+function showPaper(keepId) {
+  const rows = paper.question_ids
+    .map(id => DATA.questions.find(q => q.id === id)).filter(Boolean);
+  $('qlist').innerHTML = rows.length
+    ? rows.map((q, i) => questionRow(q, i + 1)).join('')
+    : '<div class="empty">这套卷子的题目不在当前题库中</div>';
+  for (const el of $('qlist').children) {
+    if (el.dataset.id) el.onclick = () => showQuestion(el.dataset.id);
+  }
+  const scores = paper.scores || {};
+  const next = rows.find(q => !(q.id in scores));
+  const focus = rows.some(q => q.id === keepId) ? keepId : (next || rows[0])?.id;
+  if (focus) showQuestion(focus);
+}
+
+function questionRow(q, slot) {
   const st = statusOf(q.id);
   const dot = st === 'correct' ? 'ok' : st === 'partial' ? 'partial' : st ? 'bad' : '';
+  const scored = paper && q.id in (paper.scores || {}) ? paper.scores[q.id] : null;
   return `<div class="item" data-id="${q.id}">
     <span class="dot ${dot}"></span>
-    <span class="q">Q${q.question}</span>
-    <span>${active ? q.unit + ' ' : ''}${q.year} ${session(q)}</span>
-    <span class="meta">${q.topics.length > 1 ? `跨${q.topics.length}点 · ` : ''}${q.marks}分</span>
+    <span class="q">Q${slot || q.question}</span>
+    <span>${active || paper ? q.unit + ' ' : ''}${q.year} ${session(q)}</span>
+    <span class="meta">${scored !== null ? `<b>${scored}</b>/` : ''}${q.marks}分</span>
   </div>`;
 }
 
@@ -274,7 +368,7 @@ function pointGroups(q) {
 function showQuestion(id) {
   const q = DATA.questions.find(x => x.id === id);
   current = q;
-  draft = { result: null, reasons: new Set(), weak: new Set(), up: null };
+  draft = { result: null, marks: null, reasons: new Set(), weak: new Set(), up: null };
 
   for (const el of $('qlist').children) {
     if (el.dataset.id) el.setAttribute('aria-current', el.dataset.id === id);
@@ -331,6 +425,7 @@ function renderAssess() {
   const box = $('assess');
   box.hidden = false;
   box.className = 'assess';
+  if (paper) return renderMarksEntry(q, box);
   box.innerHTML = `
     <h3>对照评分标准，你做得怎么样？</h3>
     <div class="opts">
@@ -349,6 +444,42 @@ function renderAssess() {
       renderFollowUp();
     };
   }
+}
+
+// In a mock paper the three verdicts are not enough: a total out of 75 needs
+// the marks themselves. The verdict is derived from the marks so the error
+// notebook keeps working the same way.
+function renderMarksEntry(q, box) {
+  const prev = paper.scores?.[q.id];
+  box.innerHTML = `
+    <h3>对照评分标准，这题拿了几分？<span class="hint">满分 ${q.marks} 分</span></h3>
+    <div class="row">
+      <button class="plain" id="mDown">−</button>
+      <input class="spr" id="mVal" type="number" inputmode="numeric" min="0" max="${q.marks}"
+             value="${prev ?? ''}" style="width:84px;text-align:center" placeholder="?">
+      <button class="plain" id="mUp">+</button>
+      <span style="width:8px"></span>
+      <button class="plain" id="mZero">0 分</button>
+      <button class="plain" id="mFull">满分</button>
+    </div>
+    <div id="followUp"></div>`;
+
+  const input = $('mVal');
+  const set = v => {
+    if (v === '' || v === null || Number.isNaN(Number(v))) { draft.result = null; return; }
+    v = Math.max(0, Math.min(q.marks, Math.round(Number(v))));
+    input.value = v;
+    draft.marks = v;
+    draft.result = v === q.marks ? 'correct' : v === 0 ? 'unknown' : 'partial';
+    renderFollowUp();
+  };
+  input.oninput = () => set(input.value);
+  input.onkeydown = e => { if (e.key === 'Enter') { set(input.value); $('save')?.click(); } };
+  $('mDown').onclick = () => set((Number(input.value) || 0) - 1);
+  $('mUp').onclick = () => set(input.value === '' ? 0 : Number(input.value) + 1);
+  $('mZero').onclick = () => set(0);
+  $('mFull').onclick = () => set(q.marks);
+  if (prev !== undefined) set(prev);
 }
 
 function renderFollowUp() {
@@ -409,7 +540,7 @@ function toggle(el, set) {
 
 
 async function save() {
-  if (!draft.result) return toast('先选一个结果');
+  if (!draft.result) return toast(paper ? '先填这题拿了几分' : '先选一个结果');
   const btn = $('save');
   btn.disabled = true;
   try {
@@ -425,12 +556,21 @@ async function save() {
       photo_paths: shots,
     });
     attempts.unshift(row);
-    toast(draft.result === 'correct' ? '已记录' : '已存进错题本');
-    if (active) {
+    if (paper) {
+      const sc = await mock.score(paper, current.id, draft.marks);
+      toast(sc.finished
+        ? `做完了，总分 ${sc.earned} / ${sc.max}`
+        : `记 ${draft.marks} 分，目前 ${sc.earned} 分`);
       drawAssignBar();
-      showAssigned(current?.id);
+      showPaper();                 // moves on to the next unscored question
     } else {
-      selectTopic(topic);
+      toast(draft.result === 'correct' ? '已记录' : '已存进错题本');
+      if (active) {
+        drawAssignBar();
+        showAssigned(current?.id);
+      } else {
+        selectTopic(topic);
+      }
     }
   } catch (err) {
     toast(err.message || '保存失败');
