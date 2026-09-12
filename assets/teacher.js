@@ -1,14 +1,14 @@
-import * as db from './db.js?v=6f0cc6cd';
-import * as assign from './assign.js?v=6f0cc6cd';
-import * as photos from './photos.js?v=6f0cc6cd';
-import * as mock from './mock.js?v=6f0cc6cd';
+import * as db from './db.js?v=6922eb1f';
+import * as assign from './assign.js?v=6922eb1f';
+import * as photos from './photos.js?v=6922eb1f';
+import * as mock from './mock.js?v=6922eb1f';
 
 const P = 'data/papers/';
 
 const REASON_LABEL = {
   misread: '看错题', slip: '抄错/算错', unknown: '知识点不会',
   stuck: '知道方法但卡住', working: '跳步', form: '答案形式不对',
-  english: '英文没读懂', time: '时间不够',
+  english: '英文没读懂', time: '时间不够', other: '其他',
 };
 const RESULTS = { correct: '全对', partial: '部分对', unknown: '不会' };
 
@@ -189,7 +189,8 @@ async function showStudent(id) {
           <span class="badge ${r.result === 'correct' ? '' : r.result === 'partial' ? 'w' : 'b'}">${
             RESULTS[r.result]}</span>
           ${(r.reasons || []).map(k =>
-            `<span class="badge g">${REASON_LABEL[k] || k}</span>`).join('')}
+            `<span class="badge g">${k === 'other' && r.reason_note
+              ? '其他：' + esc(r.reason_note) : (REASON_LABEL[k] || k)}</span>`).join('')}
           <span class="n">${day(r.created_at)}</span>
         </summary>
         <div class="qbody" data-q="${esc(r.question_id)}" data-a="${r.id}"></div>
@@ -249,7 +250,22 @@ function renderWeak() {
         <td><div class="row" style="gap:8px"><div class="bar-gauge" style="flex:1">
           <span style="width:${Math.round((n / total) * 100)}%"></span></div>
           <span class="hint">${n}</span></div></td></tr>`).join('')}
-      </tbody></table>` : '<div class="empty">还没有数据</div>'}`;
+      </tbody></table>` : '<div class="empty">还没有数据</div>'}
+
+    ${(() => {
+      // what students typed under 其他 - the raw material for the next
+      // category worth adding to the fixed list
+      const notes = rows.filter(r => r.reason_note).slice(0, 15);
+      if (!notes.length) return '';
+      const name = id => students.find(s => s.id === id)?.display_name || '';
+      return `<h3 style="margin:18px 0 4px;font-size:15px">学生自己写的「其他」</h3>
+        <p class="hint" style="margin:0 0 8px">同一类写法出现多了，就该加成正式选项</p>
+        <table><tbody>${notes.map(r =>
+          `<tr><td style="width:22%" class="hint">${esc(name(r.student_id))}</td>
+           <td>${esc(r.reason_note)}</td>
+           <td class="hint" style="width:18%">${day(r.created_at)}</td></tr>`).join('')}
+        </tbody></table>`;
+    })()}`;
 }
 
 // ------------------------------------------------------------- assignments

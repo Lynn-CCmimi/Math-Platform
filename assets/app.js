@@ -1,8 +1,8 @@
-import * as db from './db.js?v=6f0cc6cd';
-import * as assign from './assign.js?v=6f0cc6cd';
-import * as photos from './photos.js?v=6f0cc6cd';
-import * as mock from './mock.js?v=6f0cc6cd';
-import * as analysis from './analysis.js?v=6f0cc6cd';
+import * as db from './db.js?v=6922eb1f';
+import * as assign from './assign.js?v=6922eb1f';
+import * as photos from './photos.js?v=6922eb1f';
+import * as mock from './mock.js?v=6922eb1f';
+import * as analysis from './analysis.js?v=6922eb1f';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -24,6 +24,7 @@ const REASONS = [
   ['form', '答案形式不对', '没化简 · 没排除增根 · 精确度 · 要 exact value'],
   ['english', '英文没读懂'],
   ['time', '时间不够'],
+  ['other', '其他'],
 ];
 const REASON_LABEL = Object.fromEntries(REASONS.map(([k, v]) => [k, v]));
 const ROLE_MARK = { core: ['●', '考点'], technique: ['○', '用到'], prereq: ['◇', '前置'] };
@@ -556,6 +557,8 @@ function renderFollowUp() {
         `<div class="pick" data-k="${k}" role="button" aria-pressed="false">${v}${
           hint ? `<span class="hint" style="margin-left:7px">${hint}</span>` : ''}</div>`).join('')}
     </div>
+    <input class="spr" id="otherNote" hidden placeholder="写一下是什么问题"
+           style="width:100%;max-width:480px;margin-top:8px;font-size:14px" maxlength="120">
 
     <h3 style="margin-top:16px">哪些知识点没掌握？<span class="hint">点亮你不会的</span></h3>
     <div class="picks" id="weak">
@@ -572,7 +575,13 @@ function renderFollowUp() {
     </div>`;
 
   for (const el of wrap.querySelectorAll('#reasons .pick')) {
-    el.onclick = () => toggle(el, draft.reasons);
+    el.onclick = () => {
+      toggle(el, draft.reasons);
+      if (el.dataset.k === 'other') {
+        $('otherNote').hidden = !draft.reasons.has('other');
+        if (!$('otherNote').hidden) $('otherNote').focus();
+      }
+    };
   }
   for (const el of wrap.querySelectorAll('#weak .pick')) {
     el.onclick = () => toggle(el, draft.weak);
@@ -601,6 +610,7 @@ async function save() {
       unit: current.unit,
       result: draft.result,
       reasons: [...draft.reasons],
+      reason_note: draft.reasons.has('other') ? ($('otherNote')?.value.trim() || null) : null,
       weak_sections: [...draft.weak],
       photo_paths: shots,
     });
@@ -732,7 +742,8 @@ function renderWrong() {
               <strong>${q.year}年${session(q)} 第${q.question}题</strong>
               <span class="badge ${a.result === 'partial' ? 'w' : 'b'}">${RESULTS[a.result]}</span>
               ${(a.reasons || []).map(r =>
-                `<span class="badge g">${REASON_LABEL[r] || r}</span>`).join('')}
+                `<span class="badge g">${r === 'other' && a.reason_note
+                  ? '其他：' + esc(a.reason_note) : (REASON_LABEL[r] || r)}</span>`).join('')}
               <span class="n">${new Date(a.created_at).toLocaleDateString('zh-CN')}</span>
             </summary>
             ${a.weak_sections?.length ? `<div class="tags">${

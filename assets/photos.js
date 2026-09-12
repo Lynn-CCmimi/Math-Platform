@@ -8,7 +8,7 @@
 // pathsOf() hides the difference, and any edit writes the row back in the new
 // shape.
 
-import * as db from './db.js?v=6f0cc6cd';
+import * as db from './db.js?v=6922eb1f';
 
 const MAX = 6;
 
