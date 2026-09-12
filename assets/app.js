@@ -1,8 +1,10 @@
-import * as db from './db.js?v=6922eb1f';
-import * as assign from './assign.js?v=6922eb1f';
-import * as photos from './photos.js?v=6922eb1f';
-import * as mock from './mock.js?v=6922eb1f';
-import * as analysis from './analysis.js?v=6922eb1f';
+import * as db from './db.js?v=d6144186';
+import * as assign from './assign.js?v=d6144186';
+import * as photos from './photos.js?v=d6144186';
+import * as mock from './mock.js?v=d6144186';
+import * as analysis from './analysis.js?v=d6144186';
+import * as pdf from './pdf.js?v=d6144186';
+import * as batch from './batch.js?v=d6144186';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -175,6 +177,8 @@ function drawAssignBar() {
   $('unit').hidden = Boolean(active || paper);
   if (paper) {
     bar.appendChild(mock.banner(paper, { onExit: closeMock }));
+    bar.appendChild(setTools(paper.question_ids, `${paper.unit} 模拟卷 ${new Date(paper.created_at).toLocaleDateString('zh-CN')}`,
+      () => openBatch(paper.question_ids, () => { drawAssignBar(); showPaper(); })));
     if (mock.scoreOf(paper).finished) {
       const box = document.createElement('div');
       bar.appendChild(box);
@@ -195,6 +199,8 @@ function drawAssignBar() {
       onExit: closeAssignment,
       parts: assign.composition(active, DATA.questions, q => q.topic_titles || []),
     }));
+    bar.appendChild(setTools(active.question_ids, `作业 ${active.title}`,
+      () => openBatch(active.question_ids, () => { drawAssignBar(); showAssigned(current?.id); })));
   }
 }
 
@@ -212,6 +218,110 @@ function showAssigned(keepId) {
   // stay on the question just answered instead of jumping back to the top
   const focus = rows.some(q => q.id === keepId) ? keepId : rows[0]?.id;
   if (focus) showQuestion(focus);
+}
+
+// ---------------------------------------------------------- sets on paper
+// A mock paper and an assignment are both "a list of question ids"; the PDF
+// buttons and whole-set scoring work on that list and do not care which.
+
+const reasonBadges = a => (a.reasons || []).map(r =>
+  `<span class="badge g">${r === 'other' && a.reason_note
+    ? '其他：' + esc(a.reason_note) : (REASON_LABEL[r] || r)}</span>`).join('');
+
+const qLabel = q => `${q.unit} ${q.year}年${session(q)} 第${q.question}题`;
+
+function setSpec(ids, title, kind) {
+  const qs = ids.map(id => DATA.questions.find(q => q.id === id)).filter(Boolean);
+  const total = qs.reduce((n, q) => n + q.marks, 0);
+  return {
+    title,
+    fileName: `${title.replace(/[\/:*?"<>|]/g, '')}${kind === 'answers' ? '-答案' : ''}.pdf`,
+    lines: [`共 ${qs.length} 题 · ${total} 分` + (total === 75 ? ' · 建议 1 小时 30 分' : '')],
+    items: qs.map((q, i) => ({
+      label: `Q${i + 1}`,
+      note: qLabel(q),
+      marks: q.marks,
+      images: (kind === 'answers' ? q.ms_images : q.images).map(src => P + src),
+    })).filter(it => it.images.length),
+  };
+}
+
+// The row of tools under a set's banner.
+function setTools(ids, title, onBatch) {
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.style.cssText = 'margin:-4px 0 12px';
+  const pdfBox = document.createElement('span');
+  pdfBox.className = 'row';
+  row.appendChild(pdfBox);
+  pdf.buttons(pdfBox, { set: kind => setSpec(ids, title, kind), onError: toast });
+  const b = document.createElement('button');
+  b.className = 'plain';
+  b.textContent = '整套录分';
+  b.onclick = onBatch;
+  row.appendChild(b);
+  const hint = document.createElement('span');
+  hint.className = 'hint';
+  hint.textContent = '打印出来做，回来一次录完';
+  row.appendChild(hint);
+  return row;
+}
+
+// Whole-set scoring: one attempt per filled row, the same record the
+// one-at-a-time flow writes, then a list of what lost marks to follow up on.
+function openBatch(ids, afterSave) {
+  const host = $('assignBar');
+  const box = document.createElement('div');
+  host.appendChild(box);
+  box.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  const qs = ids.map(id => DATA.questions.find(q => q.id === id)).filter(Boolean);
+  batch.render(box, {
+    items: qs.map(q => ({ id: q.id, label: qLabel(q), max: q.marks,
+                          prev: paper?.scores?.[q.id] })),
+    onCancel: () => box.remove(),
+    onSave: async entries => {
+      if (!entries.length) return toast('一题都没填');
+      const lost = [];
+      try {
+        for (const e of entries) {
+          const row = await db.saveAttempt({
+            student_id: me.id, question_id: e.id,
+            unit: qs.find(q => q.id === e.id).unit,
+            result: e.marks >= e.max ? 'correct' : e.marks === 0 ? 'unknown' : 'partial',
+            reasons: [], weak_sections: [], photo_paths: [],
+          });
+          attempts.unshift(row);
+          if (paper) await mock.score(paper, e.id, e.marks);
+          if (e.marks < e.max) {
+            lost.push({ attemptId: row.id, lost: e.max - e.marks,
+                        label: `Q${ids.indexOf(e.id) + 1} ${qLabel(qs.find(q => q.id === e.id))}` });
+          }
+        }
+      } catch (err) {
+        toast(err.message || '保存失败');
+        return;
+      }
+      toast(`已录入 ${entries.length} 题`);
+      afterSave();
+      const follow = document.createElement('div');
+      $('assignBar').appendChild(follow);
+      batch.renderFollowUp(follow, { lost, onOpen: openWrongItem });
+      follow.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    },
+  });
+}
+
+// Jump to one record in the notebook, opened.
+function openWrongItem(attemptId) {
+  tab('Wrong');
+  const body = $('wrongList').querySelector(`.qbody[data-a="${attemptId}"]`);
+  if (!body) return;
+  const item = body.closest('details.qitem');
+  const grp = item.closest('details.grp');
+  grp.open = true;
+  item.open = true;
+  item.dispatchEvent(new Event('toggle'));
+  item.scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
 
 // ------------------------------------------------------------ mock papers
@@ -671,6 +781,49 @@ async function openPage(p, book) {
   if ($('next')) $('next').onclick = () => openPage(page + 1);
 }
 
+// Reasons can be added or changed after the fact - a set scored in one go
+// has none, and a student may only work out why later.
+function wireReasonEdit(body, a) {
+  const box = body.querySelector('[data-reasons]');
+  const btn = body.querySelector('[data-edit-reasons]');
+  const show = () => { box.innerHTML = `<div class="picks">${reasonBadges(a) || '<span class="hint">没有标错因</span>'}</div>`; };
+  show();
+  btn.onclick = () => {
+    const picked = new Set(a.reasons || []);
+    box.innerHTML = `
+      <div class="picks">${REASONS.map(([k, v, hint]) =>
+        `<div class="pick" data-k="${k}" role="button" aria-pressed="${picked.has(k)}">${v}${
+          hint ? `<span class="hint" style="margin-left:7px">${hint}</span>` : ''}</div>`).join('')}</div>
+      <input class="spr" data-note ${picked.has('other') ? '' : 'hidden'} placeholder="写一下是什么问题"
+             value="${esc(a.reason_note || '')}" style="width:100%;max-width:480px;margin-top:8px;font-size:14px" maxlength="120">
+      <div class="row" style="margin-top:10px">
+        <button class="act" data-save>保存</button>
+        <button class="plain" data-cancel>取消</button></div>`;
+    for (const el of box.querySelectorAll('.pick')) {
+      el.onclick = () => {
+        toggle(el, picked);
+        if (el.dataset.k === 'other') box.querySelector('[data-note]').hidden = !picked.has('other');
+      };
+    }
+    box.querySelector('[data-cancel]').onclick = show;
+    box.querySelector('[data-save]').onclick = async () => {
+      const patch = {
+        reasons: [...picked],
+        reason_note: picked.has('other') ? (box.querySelector('[data-note]').value.trim() || null) : null,
+      };
+      try {
+        await db.updateAttempt(a.id, patch);
+        Object.assign(a, patch);
+        const badges = $('wrongList').querySelector(`[data-reason-badges="${a.id}"]`);
+        if (badges) badges.innerHTML = reasonBadges(a);
+        btn.textContent = a.reasons.length ? '修改' : '补充';
+        toast('错因已保存');
+        show();
+      } catch (err) { toast(err.message || '保存失败'); }
+    };
+  };
+}
+
 // ---------------------------------------------------------- error notebook
 
 let reasonFilter = null;
@@ -741,9 +894,7 @@ function renderWrong() {
               <span class="caret">▶</span>
               <strong>${q.year}年${session(q)} 第${q.question}题</strong>
               <span class="badge ${a.result === 'partial' ? 'w' : 'b'}">${RESULTS[a.result]}</span>
-              ${(a.reasons || []).map(r =>
-                `<span class="badge g">${r === 'other' && a.reason_note
-                  ? '其他：' + esc(a.reason_note) : (REASON_LABEL[r] || r)}</span>`).join('')}
+              <span data-reason-badges="${a.id}">${reasonBadges(a)}</span>
               <span class="n">${new Date(a.created_at).toLocaleDateString('zh-CN')}</span>
             </summary>
             ${a.weak_sections?.length ? `<div class="tags">${
@@ -769,8 +920,12 @@ async function fillWrongBody(item) {
 
   body.innerHTML = `
     <img class="paper" loading="lazy" src="${P}${q.images[0]}" alt="题目">
+    <div class="ref"><div class="h">错因 <button class="plain" data-edit-reasons
+        style="margin-left:8px;padding:2px 9px;font-size:12px">${a.reasons?.length ? '修改' : '补充'}</button></div>
+      <div data-reasons></div></div>
     <div class="ref"><div class="h">我的订正</div><div data-shots></div></div>
     <div class="ref">${pointGroups(q)}</div>`;
+  wireReasonEdit(body, a);
 
   for (const link of body.querySelectorAll('.ref a')) {
     link.onclick = () => { tab('Book'); openPage(+link.dataset.p, link.dataset.b); };

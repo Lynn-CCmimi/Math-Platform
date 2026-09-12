@@ -1,7 +1,7 @@
-import * as db from './db.js?v=6922eb1f';
-import * as assign from './assign.js?v=6922eb1f';
-import * as photos from './photos.js?v=6922eb1f';
-import * as mock from './mock.js?v=6922eb1f';
+import * as db from './db.js?v=d6144186';
+import * as assign from './assign.js?v=d6144186';
+import * as photos from './photos.js?v=d6144186';
+import * as mock from './mock.js?v=d6144186';
 
 const P = 'data/papers/';
 
@@ -295,9 +295,26 @@ function mountAssign() {
   renderAssignList();
 }
 
+// The same PDF the student can download, for handing out on paper.
+function pdfSpec(a, kind) {
+  const qs = a.question_ids.map(id => DATA.questions.find(q => q.id === id)).filter(Boolean);
+  const total = qs.reduce((n, q) => n + q.marks, 0);
+  return {
+    title: `作业 ${a.title}`,
+    fileName: `作业-${a.title.replace(/[\\/:*?"<>|]/g, '')}${kind === 'answers' ? '-答案' : ''}.pdf`,
+    lines: [`共 ${qs.length} 题 · ${total} 分`],
+    items: qs.map((q, i) => ({
+      label: `Q${i + 1}`, marks: q.marks,
+      note: `${q.unit} ${q.year}年${session(q)} 第${q.question}题`,
+      images: (kind === 'answers' ? q.ms_images : q.images).map(src => P + src),
+    })).filter(it => it.images.length),
+  };
+}
+
 function renderAssignList() {
   assign.renderTeacherList($('assignList'), {
     assignments: sets, attempts: rows, students,
+    pdfSpec, onError: toast,
     onDeleted: async err => {
       if (err) return toast('删除失败：' + err);
       sets = await db.myAssignments();
