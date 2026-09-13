@@ -1,10 +1,10 @@
-import * as db from './db.js?v=d6144186';
-import * as assign from './assign.js?v=d6144186';
-import * as photos from './photos.js?v=d6144186';
-import * as mock from './mock.js?v=d6144186';
-import * as analysis from './analysis.js?v=d6144186';
-import * as pdf from './pdf.js?v=d6144186';
-import * as batch from './batch.js?v=d6144186';
+import * as db from './db.js?v=5aa023df';
+import * as assign from './assign.js?v=5aa023df';
+import * as photos from './photos.js?v=5aa023df';
+import * as mock from './mock.js?v=5aa023df';
+import * as analysis from './analysis.js?v=5aa023df';
+import * as pdf from './pdf.js?v=5aa023df';
+import * as batch from './batch.js?v=5aa023df';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';

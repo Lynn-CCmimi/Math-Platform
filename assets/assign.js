@@ -12,8 +12,8 @@
 // note:    q => string     short right-hand note, e.g. difficulty
 // preview: q => string[]   image urls, so the teacher picks by seeing the question
 
-import * as db from './db.js?v=d6144186';
-import * as pdf from './pdf.js?v=d6144186';
+import * as db from './db.js?v=5aa023df';
+import * as pdf from './pdf.js?v=5aa023df';
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
