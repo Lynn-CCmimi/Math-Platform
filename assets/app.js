@@ -1,10 +1,10 @@
-import * as db from './db.js?v=5aa023df';
-import * as assign from './assign.js?v=5aa023df';
-import * as photos from './photos.js?v=5aa023df';
-import * as mock from './mock.js?v=5aa023df';
-import * as analysis from './analysis.js?v=5aa023df';
-import * as pdf from './pdf.js?v=5aa023df';
-import * as batch from './batch.js?v=5aa023df';
+import * as db from './db.js?v=7d8a9ea6';
+import * as assign from './assign.js?v=7d8a9ea6';
+import * as photos from './photos.js?v=7d8a9ea6';
+import * as mock from './mock.js?v=7d8a9ea6';
+import * as analysis from './analysis.js?v=7d8a9ea6';
+import * as pdf from './pdf.js?v=7d8a9ea6';
+import * as batch from './batch.js?v=7d8a9ea6';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -205,6 +205,7 @@ function drawAssignBar() {
 }
 
 function showAssigned(keepId) {
+  const keepScroll = $('qlist').scrollTop;
   const want = new Set(active.question_ids);
   const rows = DATA.questions.filter(q => want.has(q.id))
     .sort((a, b) => a.unit.localeCompare(b.unit)
@@ -215,6 +216,7 @@ function showAssigned(keepId) {
   for (const el of $('qlist').children) {
     if (el.dataset.id) el.onclick = () => showQuestion(el.dataset.id);
   }
+  $('qlist').scrollTop = keepScroll;
   // stay on the question just answered instead of jumping back to the top
   const focus = rows.some(q => q.id === keepId) ? keepId : rows[0]?.id;
   if (focus) showQuestion(focus);
@@ -415,6 +417,7 @@ function closeMock() {
 // The paper's own order is the order to work in: it climbs in marks the way
 // a real paper does. Lands on the first question not yet scored.
 function showPaper(keepId) {
+  const keepScroll = $('qlist').scrollTop;
   const rows = paper.question_ids
     .map(id => DATA.questions.find(q => q.id === id)).filter(Boolean);
   $('qlist').innerHTML = rows.length
@@ -423,6 +426,7 @@ function showPaper(keepId) {
   for (const el of $('qlist').children) {
     if (el.dataset.id) el.onclick = () => showQuestion(el.dataset.id);
   }
+  $('qlist').scrollTop = keepScroll;
   const scores = paper.scores || {};
   const next = rows.find(q => !(q.id in scores));
   const focus = rows.some(q => q.id === keepId) ? keepId : (next || rows[0])?.id;
@@ -482,8 +486,10 @@ async function selectUnit(u) {
   if (ids.length) selectTopic(ids[0]);
 }
 
-function selectTopic(t) {
+function selectTopic(t, keepId = null) {
+  const sameTopic = topic === t;
   topic = t;
+  const keepScroll = sameTopic ? $('qlist').scrollTop : 0;
   for (const el of $('topics').children) {
     if (el.dataset.t) el.setAttribute('aria-pressed', el.dataset.t === t);
   }
@@ -498,7 +504,11 @@ function selectTopic(t) {
   for (const el of $('qlist').children) {
     if (el.dataset.id) el.onclick = () => showQuestion(el.dataset.id);
   }
-  if (rows.length) showQuestion(rows[0].id);
+  $('qlist').scrollTop = keepScroll;
+  // after saving, stay on the question just done rather than jumping to the
+  // first in the topic
+  const focus = rows.some(q => q.id === keepId) ? keepId : rows[0]?.id;
+  if (focus) showQuestion(focus);
   else $('qpanel').innerHTML = '<div class="empty">从左边选一道题</div>';
 }
 
@@ -738,7 +748,7 @@ async function save() {
         drawAssignBar();
         showAssigned(current?.id);
       } else {
-        selectTopic(topic);
+        selectTopic(topic, current?.id);
       }
     }
   } catch (err) {
