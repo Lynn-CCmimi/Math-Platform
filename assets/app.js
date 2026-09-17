@@ -1,10 +1,11 @@
-import * as db from './db.js?v=7d8a9ea6';
-import * as assign from './assign.js?v=7d8a9ea6';
-import * as photos from './photos.js?v=7d8a9ea6';
-import * as mock from './mock.js?v=7d8a9ea6';
-import * as analysis from './analysis.js?v=7d8a9ea6';
-import * as pdf from './pdf.js?v=7d8a9ea6';
-import * as batch from './batch.js?v=7d8a9ea6';
+import * as db from './db.js?v=810529b4';
+import * as assign from './assign.js?v=810529b4';
+import * as photos from './photos.js?v=810529b4';
+import * as mock from './mock.js?v=810529b4';
+import * as analysis from './analysis.js?v=810529b4';
+import * as pdf from './pdf.js?v=810529b4';
+import * as batch from './batch.js?v=810529b4';
+import * as history from './history.js?v=810529b4';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -290,6 +291,7 @@ function openBatch(ids, afterSave) {
             student_id: me.id, question_id: e.id,
             unit: qs.find(q => q.id === e.id).unit,
             result: e.marks >= e.max ? 'correct' : e.marks === 0 ? 'unknown' : 'partial',
+            marks: e.marks, assignment_id: active?.id ?? null,
             reasons: [], weak_sections: [], photo_paths: [],
           });
           attempts.unshift(row);
@@ -543,16 +545,14 @@ function showQuestion(id) {
     if (el.dataset.id) el.setAttribute('aria-current', el.dataset.id === id);
   }
 
-  const prev = latest(id);
   $('qpanel').innerHTML = `
     <div class="qhead">
       <h2>${q.unit} · ${q.year}年${session(q)} · 第${q.question}题</h2>
       <span class="badge">${q.marks} 分</span>
       ${(q.topic_titles || []).map((t, i) =>
         `<span class="badge ${i ? 'g' : ''}">${esc(t)}</span>`).join('')}
-      ${prev ? `<span class="badge ${prev.result === 'correct' ? '' : 'w'}">上次：${
-        RESULTS[prev.result]}</span>` : ''}
     </div>
+    <div id="hist" hidden></div>
     ${q.images.map(i => `<img class="paper" src="${P}${i}" alt="题目">`).join('')}
     <div class="row">
       ${q.ms_images.length
@@ -565,6 +565,9 @@ function showQuestion(id) {
       <div class="legend">● 考点　○ 用到的方法　◇ 前置知识</div>
       ${pointGroups(q)}
     </div>`;
+
+  history.render($('hist'), attempts.filter(a => a.question_id === id),
+                 { max: q.marks, reasonLabel: k => REASON_LABEL[k] || k });
 
   const btn = $('reveal');
   if (btn) {
@@ -594,7 +597,7 @@ function renderAssess() {
   const box = $('assess');
   box.hidden = false;
   box.className = 'assess';
-  if (paper) return renderMarksEntry(q, box);
+  if (paper || active) return renderMarksEntry(q, box);
   box.innerHTML = `
     <h3>对照评分标准，你做得怎么样？</h3>
     <div class="opts">
@@ -615,11 +618,11 @@ function renderAssess() {
   }
 }
 
-// In a mock paper the three verdicts are not enough: a total out of 75 needs
-// the marks themselves. The verdict is derived from the marks so the error
-// notebook keeps working the same way.
+// In a mock paper or an assignment the three verdicts are not enough: a total
+// out of 75, or the teacher's grid, needs the marks themselves. The verdict is
+// derived from the marks so the error notebook keeps working the same way.
 function renderMarksEntry(q, box) {
-  const prev = paper.scores?.[q.id];
+  const prev = paper?.scores?.[q.id];
   box.innerHTML = `
     <h3>对照评分标准，这题拿了几分？<span class="hint">满分 ${q.marks} 分</span></h3>
     <div class="row">
@@ -729,6 +732,8 @@ async function save() {
       question_id: current.id,
       unit: current.unit,
       result: draft.result,
+      marks: draft.marks,
+      assignment_id: active?.id ?? null,
       reasons: [...draft.reasons],
       reason_note: draft.reasons.has('other') ? ($('otherNote')?.value.trim() || null) : null,
       weak_sections: [...draft.weak],

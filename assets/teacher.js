@@ -1,7 +1,7 @@
-import * as db from './db.js?v=7d8a9ea6';
-import * as assign from './assign.js?v=7d8a9ea6';
-import * as photos from './photos.js?v=7d8a9ea6';
-import * as mock from './mock.js?v=7d8a9ea6';
+import * as db from './db.js?v=810529b4';
+import * as assign from './assign.js?v=810529b4';
+import * as photos from './photos.js?v=810529b4';
+import * as mock from './mock.js?v=810529b4';
 
 const P = 'data/papers/';
 
@@ -18,6 +18,7 @@ let rows = [];
 let sets = [];
 let papers = [];
 let picked = null;
+let recFilter = 'all';   // all | set | own - which records the student detail lists
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c =>
@@ -180,14 +181,19 @@ async function showStudent(id) {
     ${mock.renderTeacherRows(myPapers)}
 
     <h3 style="font-size:14px;margin:16px 0 6px">练习记录</h3>
-    ${mine.slice(0, 40).map(r => {
+    <div class="chips" style="margin-bottom:8px">${[['all', '全部'], ['set', '作业'], ['own', '自练']].map(([k, v]) =>
+      `<button class="chip" data-rf="${k}" aria-pressed="${recFilter === k}">${v}<b>${
+        k === 'all' ? mine.length : mine.filter(r => (setOf(r) != null) === (k === 'set')).length}</b></button>`).join('')}</div>
+    ${mine.filter(r => recFilter === 'all' || (setOf(r) != null) === (recFilter === 'set')).slice(0, 40).map(r => {
       const q = DATA.questions.find(x => x.id === r.question_id);
+      const set = setOf(r);
       return `<details class="qitem" style="margin-left:0">
         <summary>
           <span class="caret">▶</span>
           <strong>${q ? `${q.unit} ${q.year}年${session(q)} 第${q.question}题` : r.question_id}</strong>
+          ${set ? `<span class="badge g" title="作业">📝 ${esc(set.title)}</span>` : ''}
           <span class="badge ${r.result === 'correct' ? '' : r.result === 'partial' ? 'w' : 'b'}">${
-            RESULTS[r.result]}</span>
+            r.marks != null && q ? `${r.marks}/${q.marks} 分` : RESULTS[r.result]}</span>
           ${(r.reasons || []).map(k =>
             `<span class="badge g">${k === 'other' && r.reason_note
               ? '其他：' + esc(r.reason_note) : (REASON_LABEL[k] || k)}</span>`).join('')}
@@ -200,6 +206,15 @@ async function showStudent(id) {
   for (const el of $('detail').querySelectorAll('.qitem')) {
     el.addEventListener('toggle', () => el.open && fillBody(el), { once: true });
   }
+  for (const b of $('detail').querySelectorAll('[data-rf]')) {
+    b.onclick = () => { recFilter = b.dataset.rf; showStudent(id); };
+  }
+}
+
+// The assignment a record was made in, if any (see assign.belongs for the
+// fallback on rows older than the stamp).
+function setOf(r) {
+  return sets.find(a => assign.belongs(a, r)) || null;
 }
 
 async function fillBody(item) {
@@ -311,9 +326,35 @@ function pdfSpec(a, kind) {
   };
 }
 
+// How the grid shows this board's questions and attempts.
+const board = {
+  marksOf: q => q.marks,
+  heading: q => `${q.unit} ${q.year}年${session(q)} 第${q.question}题 · ${q.marks} 分`,
+  reasonLabel: k => REASON_LABEL[k] || k,
+  question: (el, q) => {
+    el.innerHTML = q.images.map(i => `<img class="paper" loading="lazy" src="${P}${i}" alt="题目">`).join('')
+      + (q.ms_images.length ? `<details style="margin-top:8px"><summary class="hint" style="cursor:pointer">评分标准</summary>${
+          q.ms_images.map(i => `<img class="paper" loading="lazy" src="${P}${i}" alt="评分标准">`).join('')}</details>` : '');
+  },
+  attempt: async (el, a) => {
+    if (a.weak_sections?.length) {
+      el.innerHTML = `<div class="picks" style="margin-top:6px">${a.weak_sections
+        .filter(sid => DATA.sections[sid])
+        .map(sid => `<span class="badge w">没掌握：${esc(DATA.sections[sid].title)}</span>`).join('')}</div>`;
+    }
+    if (photos.pathsOf(a).length) {
+      const shots = document.createElement('div');
+      shots.style.marginTop = '6px';
+      el.appendChild(shots);
+      await photos.gallery(shots, a);
+    }
+  },
+};
+
 function renderAssignList() {
   assign.renderTeacherList($('assignList'), {
     assignments: sets, attempts: rows, students,
+    questions: DATA.questions, board,
     pdfSpec, onError: toast,
     onDeleted: async err => {
       if (err) return toast('删除失败：' + err);
