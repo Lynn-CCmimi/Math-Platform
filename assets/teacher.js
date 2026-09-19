@@ -1,7 +1,7 @@
-import * as db from './db.js?v=810529b4';
-import * as assign from './assign.js?v=810529b4';
-import * as photos from './photos.js?v=810529b4';
-import * as mock from './mock.js?v=810529b4';
+import * as db from './db.js?v=16e4cc76';
+import * as assign from './assign.js?v=16e4cc76';
+import * as photos from './photos.js?v=16e4cc76';
+import * as mock from './mock.js?v=16e4cc76';
 
 const P = 'data/papers/';
 
@@ -289,8 +289,10 @@ function renderWeak() {
 const UNIT_ORDER = ['P1', 'P2', 'P3', 'P4', 'M1', 'M2', 'S1', 'S2', 'S3'];
 const band = m => (m <= 3 ? '1-3分' : m <= 6 ? '4-6分' : '7分以上');
 
+let picker = null;
+
 function mountAssign() {
-  assign.mountPicker($('picker'), {
+  picker = assign.mountPicker($('picker'), {
     questions: DATA.questions,
     students,
     facets: [
@@ -356,6 +358,7 @@ function renderAssignList() {
     assignments: sets, attempts: rows, students,
     questions: DATA.questions, board,
     pdfSpec, onError: toast,
+    onEdit: a => picker.edit(a),
     onDeleted: async err => {
       if (err) return toast('删除失败：' + err);
       sets = await db.myAssignments();
