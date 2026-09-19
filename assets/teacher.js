@@ -1,7 +1,7 @@
-import * as db from './db.js?v=16e4cc76';
-import * as assign from './assign.js?v=16e4cc76';
-import * as photos from './photos.js?v=16e4cc76';
-import * as mock from './mock.js?v=16e4cc76';
+import * as db from './db.js?v=d7c5d387';
+import * as assign from './assign.js?v=d7c5d387';
+import * as photos from './photos.js?v=d7c5d387';
+import * as mock from './mock.js?v=d7c5d387';
 
 const P = 'data/papers/';
 
@@ -291,42 +291,18 @@ const band = m => (m <= 3 ? '1-3分' : m <= 6 ? '4-6分' : '7分以上');
 
 let picker = null;
 
-function mountAssign() {
-  picker = assign.mountPicker($('picker'), {
-    questions: DATA.questions,
-    students,
-    facets: [
+// What the chooser filters and labels questions by; shared by the new-set
+// form and the in-place editor.
+const PICK = {
+  facets: [
       { id: 'unit', name: '单元', values: q => [q.unit], order: UNIT_ORDER },
       { id: 'topic', name: '知识点', values: q => q.topic_titles || [] },
       { id: 'marks', name: '分值', values: q => [band(q.marks)],
         order: ['1-3分', '4-6分', '7分以上'] },
-    ],
-    label: q => `${q.unit} ${q.year}年${session(q)} 第${q.question}题`,
-    note: q => `${q.marks}分`,
-    preview: q => (q.images || []).map(src => P + src),
-    onSaved: async (row, msg) => {
-      toast(msg);
-      if (row) { sets = await db.myAssignments(); renderAssignList(); }
-    },
-  });
-  renderAssignList();
-}
-
-// The same PDF the student can download, for handing out on paper.
-function pdfSpec(a, kind) {
-  const qs = a.question_ids.map(id => DATA.questions.find(q => q.id === id)).filter(Boolean);
-  const total = qs.reduce((n, q) => n + q.marks, 0);
-  return {
-    title: `作业 ${a.title}`,
-    fileName: `作业-${a.title.replace(/[\\/:*?"<>|]/g, '')}${kind === 'answers' ? '-答案' : ''}.pdf`,
-    lines: [`共 ${qs.length} 题 · ${total} 分`],
-    items: qs.map((q, i) => ({
-      label: `Q${i + 1}`, marks: q.marks,
-      note: `${q.unit} ${q.year}年${session(q)} 第${q.question}题`,
-      images: (kind === 'answers' ? q.ms_images : q.images).map(src => P + src),
-    })).filter(it => it.images.length),
-  };
-}
+  ],
+  label: q => `${q.unit} ${q.year}年${session(q)} 第${q.question}题`,
+  note: q => `${q.marks}分`,
+};
 
 // How the grid shows this board's questions and attempts.
 const board = {
@@ -353,18 +329,46 @@ const board = {
   },
 };
 
+// The same PDF the student can download, for handing out on paper.
+function pdfSpec(a, kind) {
+  const qs = a.question_ids.map(id => DATA.questions.find(q => q.id === id)).filter(Boolean);
+  const total = qs.reduce((n, q) => n + q.marks, 0);
+  return {
+    title: `作业 ${a.title}`,
+    fileName: `作业-${a.title.replace(/[\\/:*?"<>|]/g, '')}${kind === 'answers' ? '-答案' : ''}.pdf`,
+    lines: [`共 ${qs.length} 题 · ${total} 分`],
+    items: qs.map((q, i) => ({
+      label: `Q${i + 1}`, marks: q.marks,
+      note: `${q.unit} ${q.year}年${session(q)} 第${q.question}题`,
+      images: (kind === 'answers' ? q.ms_images : q.images).map(src => P + src),
+    })).filter(it => it.images.length),
+  };
+}
+
+function mountAssign() {
+  picker = assign.mountPicker($('picker'), {
+    questions: DATA.questions, students, board, ...PICK,
+    assignments: () => sets, attempts: () => rows,
+    onSaved: async (row, msg) => {
+      toast(msg);
+      if (row) await reloadSets();
+    },
+  });
+  renderAssignList();
+}
+
+async function reloadSets() {
+  sets = await db.myAssignments();
+  renderAssignList();
+  picker.refresh();
+}
+
 function renderAssignList() {
   assign.renderTeacherList($('assignList'), {
     assignments: sets, attempts: rows, students,
-    questions: DATA.questions, board,
+    questions: DATA.questions, board, pick: PICK,
     pdfSpec, onError: toast,
-    onEdit: a => picker.edit(a),
-    onDeleted: async err => {
-      if (err) return toast('删除失败：' + err);
-      sets = await db.myAssignments();
-      renderAssignList();
-      toast('已删除');
-    },
+    onChanged: async () => { await reloadSets(); toast('已保存'); },
   });
 }
 
