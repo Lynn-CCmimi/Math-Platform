@@ -1,12 +1,12 @@
-import * as db from './db.js?v=449c8e43';
-import * as assign from './assign.js?v=449c8e43';
-import * as photos from './photos.js?v=449c8e43';
-import * as mock from './mock.js?v=449c8e43';
-import * as analysis from './analysis.js?v=449c8e43';
-import * as pdf from './pdf.js?v=449c8e43';
-import * as batch from './batch.js?v=449c8e43';
-import * as history from './history.js?v=449c8e43';
-import * as scope from './scope.js?v=449c8e43';
+import * as db from './db.js?v=d207fc45';
+import * as assign from './assign.js?v=d207fc45';
+import * as photos from './photos.js?v=d207fc45';
+import * as mock from './mock.js?v=d207fc45';
+import * as analysis from './analysis.js?v=d207fc45';
+import * as pdf from './pdf.js?v=d207fc45';
+import * as batch from './batch.js?v=d207fc45';
+import * as history from './history.js?v=d207fc45';
+import * as scope from './scope.js?v=d207fc45';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';

@@ -1,8 +1,8 @@
-import * as db from './db.js?v=449c8e43';
-import * as assign from './assign.js?v=449c8e43';
-import * as photos from './photos.js?v=449c8e43';
-import * as mock from './mock.js?v=449c8e43';
-import * as progress from './progress.js?v=449c8e43';
+import * as db from './db.js?v=d207fc45';
+import * as assign from './assign.js?v=d207fc45';
+import * as photos from './photos.js?v=d207fc45';
+import * as mock from './mock.js?v=d207fc45';
+import * as progress from './progress.js?v=d207fc45';
 
 const P = 'data/papers/';
 
