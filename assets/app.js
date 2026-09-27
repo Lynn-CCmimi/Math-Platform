@@ -1,11 +1,12 @@
-import * as db from './db.js?v=d7c5d387';
-import * as assign from './assign.js?v=d7c5d387';
-import * as photos from './photos.js?v=d7c5d387';
-import * as mock from './mock.js?v=d7c5d387';
-import * as analysis from './analysis.js?v=d7c5d387';
-import * as pdf from './pdf.js?v=d7c5d387';
-import * as batch from './batch.js?v=d7c5d387';
-import * as history from './history.js?v=d7c5d387';
+import * as db from './db.js?v=449c8e43';
+import * as assign from './assign.js?v=449c8e43';
+import * as photos from './photos.js?v=449c8e43';
+import * as mock from './mock.js?v=449c8e43';
+import * as analysis from './analysis.js?v=449c8e43';
+import * as pdf from './pdf.js?v=449c8e43';
+import * as batch from './batch.js?v=449c8e43';
+import * as history from './history.js?v=449c8e43';
+import * as scope from './scope.js?v=449c8e43';
 
 const P = 'data/papers/';
 const T = 'data/textbooks/';
@@ -35,6 +36,8 @@ const RESULTS = { correct: '全对', partial: '部分对', unknown: '不会' };
 
 let DATA = null;
 let me = null;
+let progress = {};        // unit -> chapter the teacher says they have reached
+let onlyReached = true;   // hide questions needing chapters not covered yet
 let attempts = [];
 let books = {};
 
@@ -109,6 +112,7 @@ const UNIT_ORDER = ['P1', 'P2', 'P3', 'P4', 'M1', 'M2', 'S1', 'S2', 'S3'];
 
 async function start(user) {
   me = await db.profile(user.id);
+  progress = db.progressOf(me);
   attempts = await db.myAttempts();
   $('gate').hidden = true;
   $('shell').hidden = false;
@@ -437,13 +441,15 @@ function showPaper(keepId) {
 
 function questionRow(q, slot) {
   const st = statusOf(q.id);
+  const over = onlyReached ? [] : scope.beyond(q, progress, DATA.sections);
   const dot = st === 'correct' ? 'ok' : st === 'partial' ? 'partial' : st ? 'bad' : '';
   const scored = paper && q.id in (paper.scores || {}) ? paper.scores[q.id] : null;
   return `<div class="item" data-id="${q.id}">
     <span class="dot ${dot}"></span>
     <span class="q">Q${slot || q.question}</span>
     <span>${active || paper ? q.unit + ' ' : ''}${q.year} ${session(q)}</span>
-    <span class="meta">${scored !== null ? `<b>${scored}</b>/` : ''}${q.marks}分</span>
+    <span class="meta">${over.length ? `<span class="badge w" title="超出进度">${esc(over[0])}</span> ` : ''}${
+      scored !== null ? `<b>${scored}</b>/` : ''}${q.marks}分</span>
   </div>`;
 }
 
@@ -458,10 +464,16 @@ function statusOf(qid) {
 
 // ------------------------------------------------------------- practice
 
+// Questions the student can actually attempt: every chapter a question needs
+// has been covered. Does nothing until the teacher records where they are.
+const scoped = () => (onlyReached
+  ? DATA.questions.filter(q => scope.inReach(q, progress, DATA.sections))
+  : DATA.questions);
+
 async function selectUnit(u) {
   unit = u;
   const counts = {}, names = {}, done = {};
-  for (const q of DATA.questions) {
+  for (const q of scoped()) {
     if (q.unit !== u) continue;
     const seen = statusOf(q.id);
     (q.topics || []).forEach((t, i) => {
@@ -479,6 +491,7 @@ async function selectUnit(u) {
     if (el.dataset.t) el.onclick = () => selectTopic(el.dataset.t);
   }
 
+  drawScopeBar();
   bookSlug = DATA.textbooks[u] || bookSlug;
   if (bookSlug) {
     books[bookSlug] = books[bookSlug] ||
@@ -495,7 +508,7 @@ function selectTopic(t, keepId = null) {
   for (const el of $('topics').children) {
     if (el.dataset.t) el.setAttribute('aria-pressed', el.dataset.t === t);
   }
-  const rows = DATA.questions
+  const rows = scoped()
     .filter(q => q.unit === unit && (q.topics || []).map(String).includes(String(t)))
     .sort((a, b) => b.sitting.localeCompare(a.sitting) || a.question - b.question);
 
@@ -512,6 +525,25 @@ function selectTopic(t, keepId = null) {
   const focus = rows.some(q => q.id === keepId) ? keepId : rows[0]?.id;
   if (focus) showQuestion(focus);
   else $('qpanel').innerHTML = '<div class="empty">从左边选一道题</div>';
+}
+
+// The strip that says what is being hidden and lets them see it anyway.
+function drawScopeBar() {
+  const bar = $('scopeBar');
+  if (!bar) return;
+  const ch = progress[unit];
+  if (ch == null || active || paper) { bar.innerHTML = ''; return; }
+  const all = DATA.questions.filter(q => q.unit === unit);
+  const out = all.length - all.filter(q => scope.inReach(q, progress, DATA.sections)).length;
+  if (!out) { bar.innerHTML = ''; return; }
+  bar.innerHTML = `<div class="row" style="margin:-4px 0 12px;gap:8px">
+    <span class="badge g">学到 ${esc(unit)} 第 ${ch} 章</span>
+    <span class="hint">${onlyReached
+      ? `${out} 道要用到后面的章节，先藏起来了`
+      : `正在显示全部 ${all.length} 道，其中 ${out} 道超出进度`}</span>
+    <button class="plain" id="scopeToggle">${onlyReached ? '全部显示' : '只看学过的'}</button>
+  </div>`;
+  $('scopeToggle').onclick = () => { onlyReached = !onlyReached; selectUnit(unit); };
 }
 
 function pointGroups(q) {

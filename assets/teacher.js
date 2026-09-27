@@ -1,7 +1,8 @@
-import * as db from './db.js?v=d7c5d387';
-import * as assign from './assign.js?v=d7c5d387';
-import * as photos from './photos.js?v=d7c5d387';
-import * as mock from './mock.js?v=d7c5d387';
+import * as db from './db.js?v=449c8e43';
+import * as assign from './assign.js?v=449c8e43';
+import * as photos from './photos.js?v=449c8e43';
+import * as mock from './mock.js?v=449c8e43';
+import * as progress from './progress.js?v=449c8e43';
 
 const P = 'data/papers/';
 
@@ -178,6 +179,8 @@ async function showStudent(id) {
       <div class="picks">${Object.entries(reasons).sort((a, b) => b[1] - a[1]).map(([k, n]) =>
         `<span class="badge g">${REASON_LABEL[k] || k} ×${n}</span>`).join('')}</div>` : ''}
 
+    <div id="progressBox"></div>
+
     ${mock.renderTeacherRows(myPapers)}
 
     <h3 style="font-size:14px;margin:16px 0 6px">练习记录</h3>
@@ -203,12 +206,37 @@ async function showStudent(id) {
       </details>`;
     }).join('')}`;
 
+  mountProgress(s);
   for (const el of $('detail').querySelectorAll('.qitem')) {
     el.addEventListener('toggle', () => el.open && fillBody(el), { once: true });
   }
   for (const b of $('detail').querySelectorAll('[data-rf]')) {
     b.onclick = () => { recFilter = b.dataset.rf; showStudent(id); };
   }
+}
+
+// Chapter reached per unit. The picker re-reads it, so a set built right
+// after changing it is scoped correctly.
+function mountProgress(s) {
+  const box = $('progressBox');
+  if (!box) return;
+  progress.render(box, {
+    student: s,
+    units: UNIT_ORDER.map(id => ({ id, name: UNIT_NAME[id] || '' })),
+    questions: DATA.questions,
+    sections: DATA.sections,
+    chapterNames: (unit, ch) => {
+      const first = Object.values(DATA.sections)
+        .find(x => x.unit === unit && String(x.section).startsWith(ch + '.'));
+      return first ? first.title : null;
+    },
+    onSaved: saved => {
+      s.progress = { ...(s.progress || {}), alevel: saved };
+      picker?.refresh();
+      toast('已保存进度');
+    },
+    onError: msg => toast('没保存上：' + msg),
+  });
 }
 
 // The assignment a record was made in, if any (see assign.belongs for the
@@ -287,6 +315,11 @@ function renderWeak() {
 // Only the board-specific description lives here; the picker itself is shared.
 
 const UNIT_ORDER = ['P1', 'P2', 'P3', 'P4', 'M1', 'M2', 'S1', 'S2', 'S3'];
+const UNIT_NAME = {
+  P1: 'Pure 1', P2: 'Pure 2', P3: 'Pure 3', P4: 'Pure 4',
+  M1: 'Mechanics 1', M2: 'Mechanics 2',
+  S1: 'Statistics 1', S2: 'Statistics 2', S3: 'Statistics 3',
+};
 const band = m => (m <= 3 ? '1-3分' : m <= 6 ? '4-6分' : '7分以上');
 
 let picker = null;
@@ -348,6 +381,7 @@ function pdfSpec(a, kind) {
 function mountAssign() {
   picker = assign.mountPicker($('picker'), {
     questions: DATA.questions, students, board, ...PICK,
+    sections: DATA.sections,
     assignments: () => sets, attempts: () => rows,
     onSaved: async (row, msg) => {
       toast(msg);
@@ -366,7 +400,7 @@ async function reloadSets() {
 function renderAssignList() {
   assign.renderTeacherList($('assignList'), {
     assignments: sets, attempts: rows, students,
-    questions: DATA.questions, board, pick: PICK,
+    questions: DATA.questions, board, pick: PICK, sections: DATA.sections,
     pdfSpec, onError: toast,
     onChanged: async () => { await reloadSets(); toast('已保存'); },
   });
